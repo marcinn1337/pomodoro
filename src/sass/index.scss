@@ -1,25 +1,3 @@
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-html {
-	font-size: 62.5%;
-}
-
-body {
-	font-size: 1.6rem;
-	background-color: #232323;
-}
-
-.app {
-	width: 100%;
-	height: 100vh;
-}
-
 // .inpucik {
 // 	overflow: hidden;
 // 	width: 720px;
@@ -47,3 +25,66 @@ body {
 // 		background: #ffffff;
 // 	}
 // }
+
+// VARS
+@use 'colors';
+$border-radius: 15px;
+
+// RESET
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+html {
+	font-size: 62.5%;
+}
+button {
+	background-color: transparent;
+	color: colors.$fontColor;
+}
+body {
+	font-size: 1.6rem;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	background-color: #232323;
+	background: linear-gradient(20deg, #11523e 0%, #05231a 100%);
+}
+//
+
+.app {
+	margin-block: 1em;
+	margin-inline: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+// TIMER TOOLS
+.timer__btns {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 300px;
+	background-color: colors.$glassColor;
+	border-radius: $border-radius;
+	.timer__btn {
+		margin-inline: 1em;
+		padding: 10px;
+		border: none;
+		i {
+			font-size: 2.5rem;
+		}
+	}
+}
+
+// TIMER CLOCK
+.timer__clock {
+	margin-block-start: 0.25em;
+	font-family: 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: 5rem;
+	text-align: center;
+	color: colors.$fontColor;
+}

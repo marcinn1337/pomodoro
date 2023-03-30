@@ -75,14 +75,14 @@ body {
   color: rgb(217, 217, 217);
 }
 
-.timer__tasks {
+section {
   -webkit-margin-before: 1em;
           margin-block-start: 1em;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   overflow: hidden;
 }
-.timer__tasks-header {
+section .section-header {
   padding: 1em 0.8em;
   background-color: rgba(0, 0, 0, 0.2);
   color: rgb(217, 217, 217);
@@ -96,11 +96,19 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
-.timer__tasks-header-title {
+section .section-header h4 {
   -webkit-margin-start: 12px;
           margin-inline-start: 12px;
   font-size: 2.2rem;
   font-weight: 400;
+}
+
+.timer__tasks {
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  overflow: hidden;
 }
 .timer__tasks-form {
   margin-inline: 0.8em;

@@ -93,25 +93,46 @@ body {
 	color: colors.$fontColor;
 }
 
-// To Do List
-.timer__tasks {
+// Header in tasks and notes sections
+section {
 	margin-block-start: 1em;
 	background-color: colors.$glassColor;
 	border-radius: $border-radius;
 	overflow: hidden;
-	&-header {
+	.section-header {
 		padding: 1em 0.8em;
 		background-color: colors.$glassColor;
 		color: colors.$fontColor;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		&-title {
+		h4 {
 			margin-inline-start: 12px;
 			font-size: 2.2rem;
 			font-weight: 400;
 		}
 	}
+}
+
+// To Do List
+.timer__tasks {
+	margin-block-start: 1em;
+	background-color: colors.$glassColor;
+	border-radius: $border-radius;
+	overflow: hidden;
+	// &-header {
+	// 	padding: 1em 0.8em;
+	// 	background-color: colors.$glassColor;
+	// 	color: colors.$fontColor;
+	// 	display: flex;
+	// 	justify-content: flex-start;
+	// 	align-items: center;
+	// 	&-title {
+	// 		margin-inline-start: 12px;
+	// 		font-size: 2.2rem;
+	// 		font-weight: 400;
+	// 	}
+	// }
 	&-form {
 		margin-inline: 0.8em;
 		display: flex;
@@ -212,4 +233,8 @@ body {
 			}
 		}
 	}
+}
+
+// Notes
+.timer__notes {
 }

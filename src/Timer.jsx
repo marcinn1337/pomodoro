@@ -18,7 +18,7 @@ function Timer() {
 				<span className='timer__clock-minutes'>21</span> : <span className='timer__clock-seconds'>37</span>
 			</div>
 			<section className='timer__tasks'>
-				<div className='timer__tasks-header'>
+				<div className='timer__tasks-header section-header'>
 					<i className='fa-solid fa-file-lines'></i>
 					<h4 className='timer__tasks-header-title'>Tasks</h4>
 				</div>
@@ -50,7 +50,7 @@ function Timer() {
 					</li>
 				</ul>
 			</section>
-			<section className='timer__notes'></section>
+			<section className='timer__notes'><div className="timer__notes-header section-header"></div></section>
 			<section className='timer__settings'></section>
 		</div>
 	)

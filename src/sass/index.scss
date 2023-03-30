@@ -45,6 +45,13 @@ button {
 	background-color: transparent;
 	color: colors.$fontColor;
 }
+h4 {
+	font-family: 'Inter', sans-serif;
+	font-weight: 500;
+}
+i {
+	font-size: 2.5rem;
+}
 body {
 	font-size: 1.6rem;
 	line-height: 1.5;
@@ -54,7 +61,7 @@ body {
 }
 //
 
-.app {
+.timer {
 	margin-block: 1em;
 	margin-inline: 10px;
 	display: flex;
@@ -73,9 +80,6 @@ body {
 		margin-inline: 1em;
 		padding: 10px;
 		border: none;
-		i {
-			font-size: 2.5rem;
-		}
 	}
 }
 
@@ -87,4 +91,125 @@ body {
 	font-size: 5rem;
 	text-align: center;
 	color: colors.$fontColor;
+}
+
+// To Do List
+.timer__tasks {
+	margin-block-start: 1em;
+	background-color: colors.$glassColor;
+	border-radius: $border-radius;
+	overflow: hidden;
+	&-header {
+		padding: 1em 0.8em;
+		background-color: colors.$glassColor;
+		color: colors.$fontColor;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		&-title {
+			margin-inline-start: 12px;
+			font-size: 2.2rem;
+			font-weight: 400;
+		}
+	}
+	&-form {
+		margin-inline: 0.8em;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid colors.$offFontColor;
+		&-input {
+			padding-block: 1em;
+			background-color: transparent;
+			border: none;
+			border-bottom: 1px solid transparent;
+			font-family: 'Inter', sans-serif;
+			font-size: 1.4rem;
+			color: colors.$fontColor;
+			&::placeholder {
+				color: colors.$subFontColor;
+			}
+			&:focus {
+				outline: none;
+				border-bottom: 1px solid colors.$fontColor;
+			}
+		}
+		&-btn {
+			padding: 0.4em 1.2em;
+			border: 1px solid colors.$subFontColor;
+			border-radius: 20px;
+			color: colors.$subFontColor;
+			font-family: 'Inter', sans-serif;
+			font-size: 1.3rem;
+			&:focus {
+				border: 1px solid colors.$fontColor;
+				color: 1px solid colors.$fontColor;
+			}
+		}
+	}
+	&-list {
+		margin-block: 1.5em 0.3em;
+		margin-inline: 0.8em;
+		list-style: none;
+		&-item {
+			padding-block: 0.5em;
+			display: flex;
+			align-items: center;
+			border-bottom: 1px solid colors.$offFontColor;
+			&-checkbox {
+				appearance: none;
+				display: grid;
+				place-content: center;
+				background-color: transparent;
+				border: 2px solid colors.$subFontColor;
+				width: 0.9em;
+				height: 0.9em;
+				border-radius: 0.15em;
+				overflow: hidden;
+				&::before {
+					content: '';
+					width: 1em;
+					height: 1em;
+					transform: scale(0);
+					transition: 150ms transform ease-in-out;
+					box-shadow: inset 1em 1em colors.$subFontColor;
+				}
+				&:checked::before {
+					transform: scale(1);
+				}
+			}
+			&-name {
+				margin-left: 5px;
+				font-size: 1.6rem;
+				font-family: 'Inter', sans-serif;
+				color: colors.$fontColor;
+			}
+			&-delete {
+				padding: 5px 0 5px 10px;
+				margin-left: auto;
+				border: none;
+				i {
+					font-size: 1.6rem;
+					color: colors.$subFontColor;
+				}
+			}
+		}
+		&-item:last-of-type {
+			border-bottom: none;
+		}
+		.done {
+			input {
+				border: 2px solid colors.$offFontColor;
+				&::before {
+					box-shadow: inset 1em 1em colors.$offFontColor;
+				}
+			}
+			p {
+				color: colors.$offFontColor;
+			}
+			i {
+				color: colors.$offFontColor;
+			}
+		}
+	}
 }

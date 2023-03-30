@@ -16,6 +16,15 @@ button {
   color: rgb(217, 217, 217);
 }
 
+h4 {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+
+i {
+  font-size: 2.5rem;
+}
+
 body {
   font-size: 1.6rem;
   line-height: 1.5;
@@ -24,7 +33,7 @@ body {
   background: linear-gradient(20deg, #11523e 0%, #05231a 100%);
 }
 
-.app {
+.timer {
   margin-block: 1em;
   margin-inline: 10px;
   display: -webkit-box;
@@ -55,9 +64,6 @@ body {
   padding: 10px;
   border: none;
 }
-.timer__btns .timer__btn i {
-  font-size: 2.5rem;
-}
 
 .timer__clock {
   -webkit-margin-before: 0.25em;
@@ -67,4 +73,161 @@ body {
   font-size: 5rem;
   text-align: center;
   color: rgb(217, 217, 217);
+}
+
+.timer__tasks {
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  overflow: hidden;
+}
+.timer__tasks-header {
+  padding: 1em 0.8em;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgb(217, 217, 217);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.timer__tasks-header-title {
+  -webkit-margin-start: 12px;
+          margin-inline-start: 12px;
+  font-size: 2.2rem;
+  font-weight: 400;
+}
+.timer__tasks-form {
+  margin-inline: 0.8em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid rgba(217, 217, 217, 0.1);
+}
+.timer__tasks-form-input {
+  padding-block: 1em;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  font-family: "Inter", sans-serif;
+  font-size: 1.4rem;
+  color: rgb(217, 217, 217);
+}
+.timer__tasks-form-input::-webkit-input-placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.timer__tasks-form-input::-moz-placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.timer__tasks-form-input:-ms-input-placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.timer__tasks-form-input::-ms-input-placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.timer__tasks-form-input::placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.timer__tasks-form-input:focus {
+  outline: none;
+  border-bottom: 1px solid rgb(217, 217, 217);
+}
+.timer__tasks-form-btn {
+  padding: 0.4em 1.2em;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  border-radius: 20px;
+  color: rgba(217, 217, 217, 0.5);
+  font-family: "Inter", sans-serif;
+  font-size: 1.3rem;
+}
+.timer__tasks-form-btn:focus {
+  border: 1px solid rgb(217, 217, 217);
+  color: 1px solid rgb(217, 217, 217);
+}
+.timer__tasks-list {
+  margin-block: 1.5em 0.3em;
+  margin-inline: 0.8em;
+  list-style: none;
+}
+.timer__tasks-list-item {
+  padding-block: 0.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid rgba(217, 217, 217, 0.1);
+}
+.timer__tasks-list-item-checkbox {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: grid;
+  place-content: center;
+  background-color: transparent;
+  border: 2px solid rgba(217, 217, 217, 0.5);
+  width: 0.9em;
+  height: 0.9em;
+  border-radius: 0.15em;
+  overflow: hidden;
+}
+.timer__tasks-list-item-checkbox::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: 150ms -webkit-transform ease-in-out;
+  transition: 150ms -webkit-transform ease-in-out;
+  transition: 150ms transform ease-in-out;
+  transition: 150ms transform ease-in-out, 150ms -webkit-transform ease-in-out;
+  -webkit-box-shadow: inset 1em 1em rgba(217, 217, 217, 0.5);
+          box-shadow: inset 1em 1em rgba(217, 217, 217, 0.5);
+}
+.timer__tasks-list-item-checkbox:checked::before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.timer__tasks-list-item-name {
+  margin-left: 5px;
+  font-size: 1.6rem;
+  font-family: "Inter", sans-serif;
+  color: rgb(217, 217, 217);
+}
+.timer__tasks-list-item-delete {
+  padding: 5px 0 5px 10px;
+  margin-left: auto;
+  border: none;
+}
+.timer__tasks-list-item-delete i {
+  font-size: 1.6rem;
+  color: rgba(217, 217, 217, 0.5);
+}
+.timer__tasks-list-item:last-of-type {
+  border-bottom: none;
+}
+.timer__tasks-list .done input {
+  border: 2px solid rgba(217, 217, 217, 0.1);
+}
+.timer__tasks-list .done input::before {
+  -webkit-box-shadow: inset 1em 1em rgba(217, 217, 217, 0.1);
+          box-shadow: inset 1em 1em rgba(217, 217, 217, 0.1);
+}
+.timer__tasks-list .done p {
+  color: rgba(217, 217, 217, 0.1);
+}
+.timer__tasks-list .done i {
+  color: rgba(217, 217, 217, 0.1);
 }/*# sourceMappingURL=index.css.map */

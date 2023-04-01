@@ -1,9 +1,13 @@
 import Clock from './components/Clock'
+import Settings from './components/Settings'
 import { useState } from 'react'
 
 function Timer() {
 	return (
 		<div className='timer'>
+			<button className='timer__open-settings-btn'>
+				<i className='fa-solid fa-gear'></i>
+			</button>
 			<Clock />
 			<section className='timer__tasks'>
 				<div className='timer__tasks-header section-header'>
@@ -17,21 +21,21 @@ function Timer() {
 				<ul className='timer__tasks-list'>
 					<li className='timer__tasks-list-item'>
 						<input className='timer__tasks-list-item-checkbox' type='checkbox' />
-						<p className='timer__tasks-list-item-name'>Task 1</p>
+						<label className='timer__tasks-list-item-name'>Task 1</label>
 						<button className='timer__tasks-list-item-delete'>
 							<i className='fa solid fa-trash'></i>
 						</button>
 					</li>
 					<li className='timer__tasks-list-item done'>
 						<input className='timer__tasks-list-item-checkbox' type='checkbox' />
-						<p className='timer__tasks-list-item-name'>Task 2</p>
+						<label className='timer__tasks-list-item-name'>Task 2</label>
 						<button className='timer__tasks-list-item-delete'>
 							<i className='fa solid fa-trash'></i>
 						</button>
 					</li>
 					<li className='timer__tasks-list-item'>
 						<input className='timer__tasks-list-item-checkbox' type='checkbox' />{' '}
-						<p className='timer__tasks-list-item-name'>Task 3</p>
+						<label className='timer__tasks-list-item-name'>Task 3</label>
 						<button className='timer__tasks-list-item-delete'>
 							<i className='fa solid fa-trash'></i>
 						</button>
@@ -45,7 +49,7 @@ function Timer() {
 				</div>
 				<textarea className='timer__notes-textarea' name='' id=''></textarea>
 			</section>
-			<section className='timer__settings'></section>
+			<Settings />
 		</div>
 	)
 }

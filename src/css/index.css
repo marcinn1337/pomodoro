@@ -14,6 +14,7 @@ html {
 button {
   background-color: transparent;
   color: rgb(217, 217, 217);
+  cursor: pointer;
 }
 
 h4 {
@@ -34,6 +35,7 @@ body {
 }
 
 .timer {
+  position: relative;
   margin-block: 1em;
   margin-inline: 10px;
   display: -webkit-box;
@@ -46,6 +48,15 @@ body {
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
+  z-index: 0;
+}
+
+.timer__open-settings-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  border: none;
 }
 
 .timer__btns {
@@ -271,4 +282,205 @@ section .section-header h4 {
   outline: 1px solid rgba(217, 217, 217, 0.1);
   background-color: rgba(0, 0, 0, 0.1);
   color: rgb(217, 217, 217);
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(7px);
+          backdrop-filter: blur(7px);
+  z-index: 1;
+}
+
+.settings {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  color: rgb(217, 217, 217);
+  font-family: "Inter", sans-serif;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.settings__header {
+  position: relative;
+  padding: 0.5em 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.settings__header::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 70%;
+  height: 2px;
+  background-color: rgba(217, 217, 217, 0.1);
+}
+.settings__header-title {
+  color: rgba(217, 217, 217, 0.5);
+  font-weight: 600;
+  font-size: 2rem;
+}
+.settings__header-close {
+  border: none;
+}
+.settings__header-close i {
+  font-size: 2.5rem;
+}
+.settings__section {
+  padding-inline: 1em;
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto;
+  gap: 0.5em 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.settings__section-title {
+  position: relative;
+  margin-bottom: 0.5em;
+  grid-column: 1/-1;
+  grid-row: 1/2;
+  font-weight: 500;
+  font-size: 2rem;
+  border-bottom: 1px solid rgba(217, 217, 217, 0.1);
+}
+.settings__section-title::after {
+  content: "(minutes)";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.3rem;
+  color: rgba(217, 217, 217, 0.5);
+}
+.settings__section label {
+  grid-column: 1/2;
+  justify-self: start;
+  font-size: 1.6rem;
+}
+.settings__section input[type=number],
+.settings__section input[type=checkbox] {
+  padding: 5px 0;
+  grid-column: 2/3;
+  justify-self: end;
+  max-width: 65px;
+  outline: 1px solid transparent;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgba(217, 217, 217, 0.5);
+  font-size: 1.6rem;
+  text-align: center;
+}
+.settings__section input[type=number]:focus,
+.settings__section input[type=checkbox]:focus {
+  color: rgb(217, 217, 217);
+  outline: 1px solid rgba(217, 217, 217, 0.5);
+}
+.settings__section input[type=number]::-webkit-input-placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.settings__section input[type=number]::-moz-placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.settings__section input[type=number]:-ms-input-placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.settings__section input[type=number]::-ms-input-placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.settings__section input[type=number]::placeholder {
+  color: rgba(217, 217, 217, 0.5);
+}
+.settings__section .switch {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  min-width: 65px;
+  height: 1.5em;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.settings__section .switch::before {
+  content: "";
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  -webkit-transform: translateX(90%);
+          transform: translateX(90%);
+  background-color: rgba(217, 217, 217, 0.5);
+  -webkit-transition: background-color 0.2s, -webkit-transform 0.2s;
+  transition: background-color 0.2s, -webkit-transform 0.2s;
+  transition: transform 0.2s, background-color 0.2s;
+  transition: transform 0.2s, background-color 0.2s, -webkit-transform 0.2s;
+}
+.settings__section .switch:checked::before {
+  background-color: rgb(217, 217, 217);
+  -webkit-transform: translateX(-90%);
+          transform: translateX(-90%);
+}
+.settings__section .color-range {
+  margin-bottom: 0.5em;
+  -webkit-appearance: none;
+  grid-column: 1/3;
+  width: 100%;
+  max-height: 0px;
+  border-radius: 10px;
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  -webkit-transition: max-height 0.2s, -webkit-transform 0.2s;
+  transition: max-height 0.2s, -webkit-transform 0.2s;
+  transition: transform 0.2s, max-height 0.2s;
+  transition: transform 0.2s, max-height 0.2s, -webkit-transform 0.2s;
+  background: -webkit-gradient(linear, left top, right top, from(hsl(0, 80%, 40%)), color-stop(10%, hsl(36, 80%, 40%)), color-stop(20%, hsl(64, 80%, 40%)), color-stop(30%, hsl(118, 80%, 40%)), color-stop(40%, hsl(179, 80%, 40%)), color-stop(50%, hsl(188, 80%, 40%)), color-stop(60%, hsl(212, 80%, 40%)), color-stop(70%, hsl(260, 80%, 40%)), color-stop(80%, hsl(284, 80%, 40%)), color-stop(90%, hsl(308, 80%, 40%)), to(hsl(0, 80%, 40%)));
+  background: linear-gradient(90deg, hsl(0, 80%, 40%) 0%, hsl(36, 80%, 40%) 10%, hsl(64, 80%, 40%) 20%, hsl(118, 80%, 40%) 30%, hsl(179, 80%, 40%) 40%, hsl(188, 80%, 40%) 50%, hsl(212, 80%, 40%) 60%, hsl(260, 80%, 40%) 70%, hsl(284, 80%, 40%) 80%, hsl(308, 80%, 40%) 90%, hsl(0, 80%, 40%) 100%);
+}
+.settings__section .color-range::-webkit-slider-thumb {
+  width: 5px;
+  -webkit-appearance: none;
+  height: 25px;
+  cursor: pointer;
+  background: #ffffff;
+}
+.settings__section .color-preview {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  min-width: 65px;
+  height: 1.5em;
+  border-radius: 15px;
+  overflow: hidden;
+  -webkit-transition: all 0.9s;
+  transition: all 0.9s;
+}
+.settings__section .color-preview:checked + .color-range {
+  max-height: 20px;
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
 }/*# sourceMappingURL=index.css.map */

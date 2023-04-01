@@ -1,22 +1,10 @@
+import Clock from './components/Clock'
 import { useState } from 'react'
 
 function Timer() {
 	return (
 		<div className='timer'>
-			<div className='timer__btns'>
-				<button className='timer__btn'>
-					<i className='fa-solid fa-arrow-rotate-left'></i>
-				</button>
-				<button className='timer__btn'>
-					<i className='fa-solid fa-play'></i>
-				</button>
-				<button className='timer__btn'>
-					<i className='fa-solid fa-gear'></i>
-				</button>
-			</div>
-			<div className='timer__clock'>
-				<span className='timer__clock-minutes'>21</span> : <span className='timer__clock-seconds'>37</span>
-			</div>
+			<Clock />
 			<section className='timer__tasks'>
 				<div className='timer__tasks-header section-header'>
 					<i className='fa-solid fa-file-lines'></i>
@@ -50,7 +38,13 @@ function Timer() {
 					</li>
 				</ul>
 			</section>
-			<section className='timer__notes'><div className="timer__notes-header section-header"></div></section>
+			<section className='timer__notes'>
+				<div className='timer__notes-header section-header'>
+					<i className='fa-solid fa-file-pen'></i>
+					<h4 className='timer__notes-header-title'>Notes</h4>
+				</div>
+				<textarea className='timer__notes-textarea' name='' id=''></textarea>
+			</section>
 			<section className='timer__settings'></section>
 		</div>
 	)

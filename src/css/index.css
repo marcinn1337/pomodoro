@@ -43,6 +43,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
 }
 
 .timer__btns {
@@ -58,9 +61,11 @@ body {
   max-width: 300px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 15px;
+  -ms-flex-item-align: center;
+      align-self: center;
 }
 .timer__btns .timer__btn {
-  margin-inline: 1em;
+  margin-inline: 1.2em;
   padding: 10px;
   border: none;
 }
@@ -238,4 +243,32 @@ section .section-header h4 {
 }
 .timer__tasks-list .done i {
   color: rgba(217, 217, 217, 0.1);
+}
+
+.timer__notes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 300px;
+}
+.timer__notes-textarea {
+  padding: 0.5em;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-size: 1.6rem;
+  color: rgba(217, 217, 217, 0.5);
+  resize: none;
+}
+.timer__notes-textarea:focus {
+  outline: 1px solid rgba(217, 217, 217, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgb(217, 217, 217);
 }/*# sourceMappingURL=index.css.map */

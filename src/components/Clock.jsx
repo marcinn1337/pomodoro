@@ -1,10 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
 
 export default function Clock() {
-	const [secondsLeft, setSecondsLeft] = useState(70)
+	// Get time values from settings
+	const timeValues = {
+		focusTime: JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime * 60,
+		shortBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).shortBreakTime,
+		longBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).longBreakTime,
+	}
+
+	const [secondsLeft, setSecondsLeft] = useState(timeValues.focusTime)
 	const [isRunning, setIsRunning] = useState(false)
 	const clockInterval = useRef()
-
 	// Clearing clock on component dismount
 	useEffect(() => {
 		return () => stopClock()

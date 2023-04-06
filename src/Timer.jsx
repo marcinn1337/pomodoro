@@ -1,11 +1,18 @@
+import { useState } from 'react'
 import Clock from './components/Clock'
 import Settings from './components/Settings'
-import { useState } from 'react'
+import Background from './components/Background'
 
 function Timer() {
+	const [activeSettings, setActiveSettings] = useState(false)
+	const toggleSettings = () => {
+		console.log('keb')
+		setActiveSettings(prevActiveSettings => !prevActiveSettings)
+	}
 	return (
 		<div className='timer'>
-			<button className='timer__open-settings-btn'>
+			<Background />
+			<button onClick={toggleSettings} className='timer__open-settings-btn'>
 				<i className='fa-solid fa-gear'></i>
 			</button>
 			<Clock />
@@ -49,7 +56,7 @@ function Timer() {
 				</div>
 				<textarea className='timer__notes-textarea' name='' id=''></textarea>
 			</section>
-			<Settings />
+			{activeSettings && <Settings toggleSettings={toggleSettings} />}
 		</div>
 	)
 }

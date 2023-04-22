@@ -9,6 +9,7 @@ export default function Settings(props) {
 			focusBg: `linear-gradient(135deg, hsl(162,66%, 19%) 0%, hsl(162,75%,8%) 100%)`,
 			shortBreakBg: `linear-gradient(135deg, hsl(50,66%, 19%) 0%, hsl(50,75%,8%) 100%)`,
 			longBreakBg: `linear-gradient(135deg, hsl(210,66%, 19%) 0%, hsl(210,75%,8%) 100%)`,
+			backgroundSound: false,
 		}
 	)
 	useEffect(() => {
@@ -67,7 +68,7 @@ export default function Settings(props) {
 					<input
 						onChange={updateSettings}
 						name='autoStart'
-						value={settings.autoStart}
+						checked={settings.autoStart}
 						className='switch'
 						type='checkbox'
 					/>
@@ -118,7 +119,13 @@ export default function Settings(props) {
 						<option value=''>Sound 4</option>
 					</select>
 					<label>Background sound</label>
-					<input className='switch' type='checkbox' />
+					<input
+						onChange={updateSettings}
+						name='backgroundSound'
+						checked={settings.backgroundSound}
+						className='switch'
+						type='checkbox'
+					/>
 					<select className='hidden-input' name='' id=''>
 						<option value=''>Sound 1</option>
 						<option value=''>Sound 2</option>

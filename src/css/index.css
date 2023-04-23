@@ -506,4 +506,18 @@ section .section-header h4 {
   max-height: 30px;
   -webkit-transform: scaleY(1);
           transform: scaleY(1);
+}
+.settings__section .volume-range {
+  position: relative;
+  -webkit-appearance: none;
+  height: 10px;
+  width: 100%;
+  background-color: rgba(217, 217, 217, 0.5);
+}
+.settings__section .volume-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: rgb(217, 217, 217);
+  width: 5px;
+  height: 15px;
+  cursor: pointer;
 }/*# sourceMappingURL=index.css.map */

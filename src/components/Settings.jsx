@@ -10,6 +10,8 @@ export default function Settings(props) {
 			shortBreakBg: `linear-gradient(135deg, hsl(50,66%, 19%) 0%, hsl(50,75%,8%) 100%)`,
 			longBreakBg: `linear-gradient(135deg, hsl(210,66%, 19%) 0%, hsl(210,75%,8%) 100%)`,
 			backgroundSound: false,
+			chosenSound: '',
+			soundVolume: 50,
 		}
 	)
 	useEffect(() => {
@@ -112,7 +114,7 @@ export default function Settings(props) {
 					<h3 className='settings__section-title'>Audio</h3>
 					<label>Alarm Sound</label>
 					<input className='switch' type='checkbox' />
-					<select className='hidden-input' name='' id=''>
+					<select className='hidden-input' name=''>
 						<option value=''>Sound 1</option>
 						<option value=''>Sound 2</option>
 						<option value=''>Sound 3</option>
@@ -126,12 +128,22 @@ export default function Settings(props) {
 						className='switch'
 						type='checkbox'
 					/>
-					<select className='hidden-input' name='' id=''>
-						<option value=''>Sound 1</option>
+					<select onChange={updateSettings} name='chosenSound' value={settings.chosenSound} className='hidden-input'>
+						<option value='rain1'>Rain 1</option>
 						<option value=''>Sound 2</option>
 						<option value=''>Sound 3</option>
 						<option value=''>Sound 4</option>
 					</select>
+					<label>Sound Volume</label>
+					<input
+						onChange={updateSettings}
+						value={settings.soundVolume}
+						name='soundVolume'
+						type='range'
+						min='0'
+						max='100'
+						className='volume-range'
+					/>
 				</div>
 			</section>
 		</>

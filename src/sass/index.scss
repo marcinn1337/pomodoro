@@ -417,5 +417,19 @@ section {
 			max-height: 30px;
 			transform: scaleY(1);
 		}
+		.volume-range {
+			position: relative;
+			-webkit-appearance: none;
+			height: 10px;
+			width: 100%;
+			background-color: colors.$subFontColor;
+			&::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				background-color: colors.$fontColor;
+				width: 5px;
+				height: 15px;
+				cursor: pointer;
+			}
+		}
 	}
 }

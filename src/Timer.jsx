@@ -1,17 +1,18 @@
-import { useState} from 'react'
-import Clock from './components/Clock'
+import { useState } from 'react'
 import Settings from './components/Settings'
+import Clock from './components/Clock'
 import Background from './components/Background'
 
 function Timer() {
 	const [activeSettings, setActiveSettings] = useState(false)
 
-
 	const toggleSettings = () => {
 		console.log('keb')
 		setActiveSettings(prevActiveSettings => !prevActiveSettings)
 	}
-
+	const wyslijInfo = () => {
+		
+	}
 	return (
 		<div className='timer'>
 			<Background />

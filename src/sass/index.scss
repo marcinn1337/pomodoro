@@ -29,8 +29,6 @@ body {
 	font-size: 1.6rem;
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
-	// background-color: #232323;
-	// background: linear-gradient(20deg, #11523e 0%, #05231a 100%);
 }
 .root-background {
 	position: absolute;
@@ -47,6 +45,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
+	min-height: 100vh;
 	background-color: transparent;
 	z-index: 0;
 }

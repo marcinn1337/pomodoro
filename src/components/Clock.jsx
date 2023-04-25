@@ -1,13 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
-import startingSfx from '../sfx/startSfx.mp3'
-import finishSfx from '../sfx/stopSfx.mp3'
+import alarmSfx from '../sfx/alarmSfx.mp3'
+import clickSfx from '../sfx/clickSfx.mp3'
 
-// Get time values from settings
+// Get settings values from local storage
 const timeValues = {
-	focusTime: JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime * 5,
+	focusTime: JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime,
 	shortBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).shortBreakTime * 3,
 	longBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).longBreakTime * 1,
 }
+const autoStart = JSON.parse(localStorage.getItem('pomodoroSettings')).autoStart
+const backgroundSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundSoundOn
+const alarmSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).alarmSoundOn
+const backgroundSfx = JSON.parse(localStorage.getItem('pomodoroSettings')).chosenSound
 
 // Set countdown timer after phase has changed
 const setTimeValues = currentPhase => {
@@ -22,17 +26,13 @@ const setTimeValues = currentPhase => {
 }
 
 export default function Clock() {
-	const autoStart = JSON.parse(localStorage.getItem('pomodoroSettings')).autoStart
-	const backgroundSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundSound
-	const backgroundSfx = JSON.parse(localStorage.getItem('pomodoroSettings')).chosenSound
 	const currentPhase = useRef('focus')
 	const [secondsLeft, setSecondsLeft] = useState(setTimeValues(currentPhase.current))
-
 	const [isRunning, setIsRunning] = useState(false)
 	const pomodorosCount = useRef(0)
 	const clockInterval = useRef()
-	const startingSfxRef = useRef()
-	const finishSfxRef = useRef()
+	const clickSfxRef = useRef()
+	const alarmSfxRef = useRef()
 	const backgroundSfxRef = useRef()
 	// Clearing clock on component dismount
 	useEffect(() => {
@@ -44,14 +44,15 @@ export default function Clock() {
 		isRunning ? startClock() : stopClock()
 	}, [isRunning])
 
-	// Check if countdown is over and change the phase of app, reset clok and toggle sound effects.  Automatically start next phase if user has set it in settings.
+	// Check if countdown is over and change the phase of app, reset clock and toggle sound effects.  Automatically start next phase if user has set it in settings.
 	useEffect(() => {
 		if (secondsLeft > 0) return
 
+		alarmSoundOn ? alarmSfxRef.current.play() : null
+		currentPhase.current = setNextPhase()
+
 		if (!autoStart) {
 			backgroundSoundOn ? backgroundSfxRef.current.pause() : null
-			finishSfxRef.current.play()
-			currentPhase.current = setNextPhase()
 			resetClock()
 			return
 		}
@@ -60,15 +61,11 @@ export default function Clock() {
 			currentPhase.current === 'focus' ? backgroundSfxRef.current.pause() : backgroundSfxRef.current.play()
 		}
 
-		finishSfxRef.current.play()
-
-		currentPhase.current = setNextPhase()
 		setSecondsLeft(setTimeValues(currentPhase.current))
 	}, [secondsLeft])
 
 	// Clock functions
 	const startClock = () => {
-		startingSfxRef.current.play()
 		if ((currentPhase.current === 'focus') & backgroundSoundOn) backgroundSfxRef.current.play()
 
 		clockInterval.current = setInterval(() => {
@@ -86,6 +83,7 @@ export default function Clock() {
 		setSecondsLeft(setTimeValues(currentPhase.current))
 	}
 	const togglePomodoro = () => {
+		clickSfxRef.current.play()
 		setIsRunning(prevState => !prevState)
 	}
 
@@ -110,8 +108,8 @@ export default function Clock() {
 
 	return (
 		<>
-			<audio src={startingSfx} ref={startingSfxRef} />
-			<audio src={finishSfx} ref={finishSfxRef} />
+			<audio src={clickSfx} ref={clickSfxRef} />
+			<audio src={alarmSfx} ref={alarmSfxRef} />
 			{backgroundSoundOn && <audio loop src={`/src/sfx/${backgroundSfx}.wav`} ref={backgroundSfxRef} />}
 			<div className='timer__btns'>
 				<button onClick={resetClock} className='timer__btn'>

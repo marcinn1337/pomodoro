@@ -1,25 +1,35 @@
 import { useState, useEffect } from 'react'
-export default function Settings(props) {
-	const [settings, setSettings] = useState(
-		JSON.parse(localStorage.getItem('pomodoroSettings')) || {
-			focusTime: 20,
-			shortBreakTime: 5,
-			longBreakTime: 15,
+
+// Init settings to avoid crash
+const initDefaultSettings = () => {
+	localStorage.setItem(
+		'pomodoroSettings',
+		JSON.stringify({
+			focusTime: 10,
+			shortBreakTime: 15,
+			longBreakTime: 20,
 			autoStart: false,
-			focusBg: `linear-gradient(135deg, hsl(162,66%, 19%) 0%, hsl(162,75%,8%) 100%)`,
-			shortBreakBg: `linear-gradient(135deg, hsl(50,66%, 19%) 0%, hsl(50,75%,8%) 100%)`,
-			longBreakBg: `linear-gradient(135deg, hsl(210,66%, 19%) 0%, hsl(210,75%,8%) 100%)`,
-			backgroundSound: false,
+			focusBgHue: 162,
+			shortBreakBgHue: 50,
+			longBreakBgHue: 210,
+			alarmSoundOn: false,
+			backgroundSoundOn: false,
 			chosenSound: '',
 			soundVolume: 50,
-		}
+		})
 	)
+}
+if (!localStorage.getItem('pomodoroSettings')) initDefaultSettings()
+
+export default function Settings(props) {
+	const [settings, setSettings] = useState(JSON.parse(localStorage.getItem('pomodoroSettings')))
 	useEffect(() => {
 		localStorage.setItem('pomodoroSettings', JSON.stringify(settings))
 	}, [settings])
 
 	const updateSettings = e => {
 		const { name, value, type, checked } = e.target
+		console.log(name, type, value)
 		setSettings(prevSettings => {
 			return {
 				...prevSettings,
@@ -35,6 +45,11 @@ export default function Settings(props) {
 				[name]: `linear-gradient(135deg, hsl(${value},66%, 19%) 0%, hsl(${value},75%,8%) 100%)`,
 			}
 		})
+	}
+	const previewColors = {
+		focusBg: `linear-gradient(135deg, hsl(${settings.focusBgHue},66%, 19%) 0%, hsl(${settings.focusBgHue},75%,8%) 100%)`,
+		shortBreakBg: `linear-gradient(135deg, hsl(${settings.shortBreakBgHue},66%, 19%) 0%, hsl(${settings.shortBreakBgHue},75%,8%) 100%)`,
+		longBreakBg: `linear-gradient(135deg, hsl(${settings.longBreakBgHue},66%, 19%) 0%, hsl(${settings.longBreakBgHue},75%,8%) 100%)`,
 	}
 	return (
 		<>
@@ -79,32 +94,35 @@ export default function Settings(props) {
 				<div className='settings__section'>
 					<h3 className='settings__section-title'>Theme</h3>
 					<label>Focus</label>
-					<input style={{ background: settings.focusBg }} className='color-preview' type='checkbox' />
+					<input style={{ background: previewColors.focusBg }} className='color-preview' type='checkbox' />
 					<input
-						onChange={updateBgColor}
-						name='focusBg'
+						onChange={updateSettings}
+						name='focusBgHue'
 						className='color-range hidden-input'
 						type='range'
+						value={settings.focusBgHue}
 						min='0'
 						max='360'
 					/>
 					<label>Short break</label>
-					<input style={{ background: settings.shortBreakBg }} className='color-preview' type='checkbox' />
+					<input style={{ background: previewColors.shortBreakBg }} className='color-preview' type='checkbox' />
 					<input
-						onChange={updateBgColor}
-						name='shortBreakBg'
+						onChange={updateSettings}
+						name='shortBreakBgHue'
 						className='color-range hidden-input'
 						type='range'
+						value={settings.shortBreakBgHue}
 						min='0'
 						max='360'
 					/>
 					<label>Long break</label>
-					<input style={{ background: settings.longBreakBg }} className='color-preview' type='checkbox' />
+					<input style={{ background: previewColors.longBreakBg }} className='color-preview' type='checkbox' />
 					<input
-						onChange={updateBgColor}
-						name='longBreakBg'
+						onChange={updateSettings}
+						name='longBreakBgHue'
 						className='color-range hidden-input'
 						type='range'
+						value={settings.longBreakBgHue}
 						min='0'
 						max='360'
 					/>
@@ -113,18 +131,18 @@ export default function Settings(props) {
 				<div className='settings__section'>
 					<h3 className='settings__section-title'>Audio</h3>
 					<label>Alarm Sound</label>
-					<input className='switch' type='checkbox' />
-					<select className='hidden-input' name=''>
-						<option value=''>Sound 1</option>
-						<option value=''>Sound 2</option>
-						<option value=''>Sound 3</option>
-						<option value=''>Sound 4</option>
-					</select>
+					<input
+						checked={settings.alarmSoundOn}
+						name='alarmSoundOn'
+						onChange={updateSettings}
+						className='switch'
+						type='checkbox'
+					/>
 					<label>Background sound</label>
 					<input
 						onChange={updateSettings}
-						name='backgroundSound'
-						checked={settings.backgroundSound}
+						name='backgroundSoundOn'
+						checked={settings.backgroundSoundOn}
 						className='switch'
 						type='checkbox'
 					/>

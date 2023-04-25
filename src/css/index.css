@@ -55,6 +55,7 @@ body {
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
+  min-height: 100vh;
   background-color: transparent;
   z-index: 0;
 }

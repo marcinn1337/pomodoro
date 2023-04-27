@@ -30,14 +30,7 @@ body {
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
 }
-.root-background {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: -10;
-}
+
 .timer {
 	position: relative;
 	padding-block: 1em;
@@ -48,6 +41,14 @@ body {
 	min-height: 100vh;
 	background-color: transparent;
 	z-index: 0;
+	&__background {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: -10;
+	}
 }
 // Timer open settings btn
 .timer__open-settings-btn {

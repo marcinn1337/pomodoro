@@ -2,30 +2,31 @@ import { useState, useEffect, useRef } from 'react'
 import alarmSfx from '../sfx/alarmSfx.mp3'
 import clickSfx from '../sfx/clickSfx.mp3'
 
-// Get settings values from local storage
-const timeValues = {
-	focusTime: JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime,
-	shortBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).shortBreakTime * 3,
-	longBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).longBreakTime * 1,
-}
-const autoStart = JSON.parse(localStorage.getItem('pomodoroSettings')).autoStart
-const backgroundSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundSoundOn
-const alarmSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).alarmSoundOn
-const backgroundSfx = JSON.parse(localStorage.getItem('pomodoroSettings')).chosenSound
-
-// Set countdown timer after phase has changed
-const setTimeValues = currentPhase => {
-	switch (currentPhase) {
-		case 'shortBreak':
-			return timeValues.shortBreakTime
-		case 'longBreak':
-			return timeValues.longBreakTime
-		default:
-			return timeValues.focusTime
+export default function Clock(props) {
+	// Get settings values from local storage
+	const timeValues = {
+		focusTime: JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime,
+		shortBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).shortBreakTime,
+		longBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).longBreakTime,
 	}
-}
+	const autoStart = JSON.parse(localStorage.getItem('pomodoroSettings')).autoStart
+	const backgroundSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundSoundOn
+	const alarmSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).alarmSoundOn
+	const backgroundSfx = JSON.parse(localStorage.getItem('pomodoroSettings')).chosenSound
 
-export default function Clock() {
+	// Set countdown timer after phase has changed
+	const setTimeValues = currentPhase => {
+		switch (currentPhase) {
+			case 'shortBreak':
+				return timeValues.shortBreakTime
+			case 'longBreak':
+				return timeValues.longBreakTime
+			default:
+				return timeValues.focusTime
+		}
+	}
+
+	// States and refs
 	const currentPhase = useRef('focus')
 	const [secondsLeft, setSecondsLeft] = useState(setTimeValues(currentPhase.current))
 	const [isRunning, setIsRunning] = useState(false)
@@ -34,6 +35,7 @@ export default function Clock() {
 	const clickSfxRef = useRef()
 	const alarmSfxRef = useRef()
 	const backgroundSfxRef = useRef()
+
 	// Clearing clock on component dismount
 	useEffect(() => {
 		return () => stopClock()
@@ -50,6 +52,7 @@ export default function Clock() {
 
 		alarmSoundOn ? alarmSfxRef.current.play() : null
 		currentPhase.current = setNextPhase()
+		sendCurrentPhaseInfo(currentPhase.current)
 
 		if (!autoStart) {
 			backgroundSoundOn ? backgroundSfxRef.current.pause() : null
@@ -96,10 +99,12 @@ export default function Clock() {
 				return 'focus'
 			default:
 				pomodorosCount.current += 1
-				console.log(pomodorosCount.current)
 				if (pomodorosCount.current === 3) return 'longBreak'
 				return 'shortBreak'
 		}
+	}
+	const sendCurrentPhaseInfo = phase => {
+		props.fetchCurrentPhase(phase)
 	}
 	// Displaying 0 before number when it's less than 10. Makes clock more aesthetic
 	const formattedMinutes =

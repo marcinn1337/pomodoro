@@ -29,20 +29,10 @@ export default function Settings(props) {
 
 	const updateSettings = e => {
 		const { name, value, type, checked } = e.target
-		console.log(name, type, value)
 		setSettings(prevSettings => {
 			return {
 				...prevSettings,
 				[name]: type === 'checkbox' ? checked : value,
-			}
-		})
-	}
-	const updateBgColor = e => {
-		const { name, value } = e.target
-		setSettings(prevSettings => {
-			return {
-				...prevSettings,
-				[name]: `linear-gradient(135deg, hsl(${value},66%, 19%) 0%, hsl(${value},75%,8%) 100%)`,
 			}
 		})
 	}

@@ -2,57 +2,25 @@ import { useState } from 'react'
 import Settings from './components/Settings'
 import Clock from './components/Clock'
 import Background from './components/Background'
+import Tasks from './components/Tasks'
 
 function Timer() {
 	const [activeSettings, setActiveSettings] = useState(false)
-
+	const [currentPhase, setCurrentPhase] = useState('focus')
 	const toggleSettings = () => {
-		console.log('keb')
 		setActiveSettings(prevActiveSettings => !prevActiveSettings)
 	}
-	const wyslijInfo = () => {
-		
+	const fetchCurrentPhase = phase => {
+		setCurrentPhase(phase)
 	}
 	return (
 		<div className='timer'>
-			<Background />
+			<Background currentPhase={currentPhase} />
 			<button onClick={toggleSettings} className='timer__open-settings-btn'>
 				<i className='fa-solid fa-gear'></i>
 			</button>
-			<Clock />
-			<section className='timer__tasks'>
-				<div className='timer__tasks-header section-header'>
-					<i className='fa-solid fa-file-lines'></i>
-					<h4 className='timer__tasks-header-title'>Tasks</h4>
-				</div>
-				<form className='timer__tasks-form'>
-					<input type='text' placeholder='Type task name...' className='timer__tasks-form-input' />
-					<button className='timer__tasks-form-btn'>Add</button>
-				</form>
-				<ul className='timer__tasks-list'>
-					<li className='timer__tasks-list-item'>
-						<input className='timer__tasks-list-item-checkbox' type='checkbox' />
-						<label className='timer__tasks-list-item-name'>Task 1</label>
-						<button className='timer__tasks-list-item-delete'>
-							<i className='fa solid fa-trash'></i>
-						</button>
-					</li>
-					<li className='timer__tasks-list-item done'>
-						<input className='timer__tasks-list-item-checkbox' type='checkbox' />
-						<label className='timer__tasks-list-item-name'>Task 2</label>
-						<button className='timer__tasks-list-item-delete'>
-							<i className='fa solid fa-trash'></i>
-						</button>
-					</li>
-					<li className='timer__tasks-list-item'>
-						<input className='timer__tasks-list-item-checkbox' type='checkbox' />{' '}
-						<label className='timer__tasks-list-item-name'>Task 3</label>
-						<button className='timer__tasks-list-item-delete'>
-							<i className='fa solid fa-trash'></i>
-						</button>
-					</li>
-				</ul>
-			</section>
+			<Clock fetchCurrentPhase={fetchCurrentPhase} />
+			<Tasks />
 			<section className='timer__notes'>
 				<div className='timer__notes-header section-header'>
 					<i className='fa-solid fa-file-pen'></i>

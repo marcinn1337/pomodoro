@@ -3,6 +3,7 @@ import Settings from './components/Settings'
 import Clock from './components/Clock'
 import Background from './components/Background'
 import Tasks from './components/Tasks'
+import QuickNotes from './components/QuickNotes'
 
 function Timer() {
 	const [activeSettings, setActiveSettings] = useState(false)
@@ -21,13 +22,7 @@ function Timer() {
 			</button>
 			<Clock fetchCurrentPhase={fetchCurrentPhase} />
 			<Tasks />
-			<section className='timer__notes'>
-				<div className='timer__notes-header section-header'>
-					<i className='fa-solid fa-file-pen'></i>
-					<h4 className='timer__notes-header-title'>Notes</h4>
-				</div>
-				<textarea className='timer__notes-textarea' name='' id=''></textarea>
-			</section>
+			<QuickNotes />
 			{activeSettings && <Settings toggleSettings={toggleSettings} />}
 		</div>
 	)

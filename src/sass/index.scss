@@ -197,13 +197,7 @@ section {
 			border-bottom: none;
 		}
 		.done {
-			input {
-				border: 2px solid colors.$offFontColor;
-				&::before {
-					box-shadow: inset 1em 1em colors.$offFontColor;
-				}
-			}
-			p {
+			label {
 				color: colors.$offFontColor;
 			}
 			i {

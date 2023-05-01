@@ -24,6 +24,7 @@ function Tasks() {
 			},
 			...prevTaskList,
 		])
+		setTaskInput('')
 	}
 	const deleteTask = id => {
 		setTaskList(prevTaskList => {
@@ -33,8 +34,16 @@ function Tasks() {
 	// Mark task as done / not done and move to to the end of the list
 	const toggleTaskStatus = id => {
 		setTaskList(prevTaskList => {
-			let finishedTask = prevTaskList.filter(task => task.id === id)[0]
-			return [...prevTaskList.filter(task => task.id !== id), { ...finishedTask, isDone: !finishedTask.isDone }]
+			const newTaskList = prevTaskList.map(currentTask => {
+				if (currentTask.id !== id) return currentTask
+
+				return {
+					...currentTask,
+					isDone: !currentTask.isDone,
+				}
+			})
+			console.log(newTaskList)
+			return newTaskList
 		})
 	}
 	const JSXtaskItems = taskList.map(taskItem => {

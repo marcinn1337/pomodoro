@@ -250,14 +250,7 @@ section .section-header h4 {
 .timer__tasks-list-item:last-of-type {
   border-bottom: none;
 }
-.timer__tasks-list .done input {
-  border: 2px solid rgba(217, 217, 217, 0.1);
-}
-.timer__tasks-list .done input::before {
-  -webkit-box-shadow: inset 1em 1em rgba(217, 217, 217, 0.1);
-          box-shadow: inset 1em 1em rgba(217, 217, 217, 0.1);
-}
-.timer__tasks-list .done p {
+.timer__tasks-list .done label {
   color: rgba(217, 217, 217, 0.1);
 }
 .timer__tasks-list .done i {

@@ -1,9 +1,20 @@
-export default function Task() {
+export default function Task(props) {
+	const deleteTask = () => {
+		props.deleteTask(props.id)
+	}
+	const toggleStatus = () => {
+		props.toggleStatus(props.id)
+	}
 	return (
 		<li className='timer__tasks-list-item'>
-			<input className='timer__tasks-list-item-checkbox' type='checkbox' />
-			<label className='timer__tasks-list-item-name'>Task 1</label>
-			<button className='timer__tasks-list-item-delete'>
+			<input
+				onChange={toggleStatus}
+				className='timer__tasks-list-item-checkbox'
+				type='checkbox'
+				checked={props.isDone}
+			/>
+			<label className='timer__tasks-list-item-name'>{props.description}</label>
+			<button onClick={deleteTask} className='timer__tasks-list-item-delete'>
 				<i className='fa solid fa-trash'></i>
 			</button>
 		</li>

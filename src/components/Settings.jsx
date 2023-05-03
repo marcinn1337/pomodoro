@@ -15,7 +15,7 @@ const initDefaultSettings = () => {
 			alarmSoundOn: false,
 			backgroundSoundOn: false,
 			chosenSound: '',
-			soundVolume: 50,
+			backgroundVolume: '',
 		})
 	)
 }
@@ -138,18 +138,19 @@ export default function Settings(props) {
 					/>
 					<select onChange={updateSettings} name='chosenSound' value={settings.chosenSound} className='hidden-input'>
 						<option value='rain1'>Rain 1</option>
-						<option value=''>Sound 2</option>
-						<option value=''>Sound 3</option>
-						<option value=''>Sound 4</option>
+						<option value='rain2'>Rain 2</option>
+						<option value='waves'>Waves</option>
+						<option value='ticking'>Clock ticking</option>
 					</select>
 					<label>Sound Volume</label>
 					<input
 						onChange={updateSettings}
-						value={settings.soundVolume}
-						name='soundVolume'
+						value={settings.backgroundVolume}
+						name='backgroundVolume'
 						type='range'
 						min='0'
-						max='100'
+						max='1'
+						step='0.01'
 						className='volume-range'
 					/>
 				</div>

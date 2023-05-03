@@ -13,6 +13,7 @@ export default function Clock(props) {
 	const backgroundSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundSoundOn
 	const alarmSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).alarmSoundOn
 	const backgroundSfx = JSON.parse(localStorage.getItem('pomodoroSettings')).chosenSound
+	const backgroundVolume = parseFloat(JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundVolume)
 
 	// Set countdown timer after phase has changed
 	const setTimeValues = currentPhase => {
@@ -73,7 +74,7 @@ export default function Clock(props) {
 
 		clockInterval.current = setInterval(() => {
 			setSecondsLeft(prevSecondsLeft => prevSecondsLeft - 1)
-		}, 200)
+		}, 500)
 	}
 	const stopClock = () => {
 		if (backgroundSoundOn) backgroundSfxRef.current.pause()
@@ -106,16 +107,18 @@ export default function Clock(props) {
 	const sendCurrentPhaseInfo = phase => {
 		props.fetchCurrentPhase(phase)
 	}
-	// Displaying 0 before number when it's less than 10. Makes clock more aesthetic
+	// Displaying 0 before number when it's less than 10. Is improves the appearance of the clock
 	const formattedMinutes =
 		Math.floor(secondsLeft / 60) < 10 ? `0${Math.floor(secondsLeft / 60)}` : `${Math.floor(secondsLeft / 60)}`
 	const formattedSeconds = secondsLeft % 60 < 10 ? `0${secondsLeft % 60}` : `${secondsLeft % 60}`
+
+	backgroundSfxRef.current.volume = backgroundVolume
 
 	return (
 		<>
 			<audio src={clickSfx} ref={clickSfxRef} />
 			<audio src={alarmSfx} ref={alarmSfxRef} />
-			{backgroundSoundOn && <audio loop src={`/src/sfx/${backgroundSfx}.wav`} ref={backgroundSfxRef} />}
+			{backgroundSoundOn && <audio loop src={`/src/sfx/${backgroundSfx}.mp3`} ref={backgroundSfxRef} />}
 			<div className='timer__btns'>
 				<button onClick={resetClock} className='timer__btn'>
 					<i className='fa-solid fa-arrow-rotate-left'></i>

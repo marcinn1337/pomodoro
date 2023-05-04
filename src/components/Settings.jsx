@@ -9,13 +9,13 @@ const initDefaultSettings = () => {
 			shortBreakTime: 15,
 			longBreakTime: 20,
 			autoStart: false,
-			focusBgHue: 162,
-			shortBreakBgHue: 50,
+			focusBgHue: 340,
+			shortBreakBgHue: 162,
 			longBreakBgHue: 210,
 			alarmSoundOn: false,
 			backgroundSoundOn: false,
-			chosenSound: '',
-			backgroundVolume: '',
+			chosenSound: 'rain1',
+			backgroundVolume: 0.5,
 		})
 	)
 }

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import alarmSfx from '../sfx/alarmSfx.mp3'
 import clickSfx from '../sfx/clickSfx.mp3'
 
+// Fixed non playing bg sound when autoStart is on
+
 export default function Clock(props) {
 	// Get settings values from local storage
 	const timeValues = {
@@ -13,7 +15,6 @@ export default function Clock(props) {
 	const backgroundSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundSoundOn
 	const alarmSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).alarmSoundOn
 	const backgroundSfx = JSON.parse(localStorage.getItem('pomodoroSettings')).chosenSound
-	const backgroundVolume = parseFloat(JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundVolume)
 
 	// Set countdown timer after phase has changed
 	const setTimeValues = currentPhase => {
@@ -36,6 +37,9 @@ export default function Clock(props) {
 	const clickSfxRef = useRef()
 	const alarmSfxRef = useRef()
 	const backgroundSfxRef = useRef()
+	if (backgroundSfxRef.current !== undefined) {
+		backgroundSfxRef.current.volume = parseFloat(JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundVolume)
+	}
 
 	// Clearing clock on component dismount
 	useEffect(() => {
@@ -51,26 +55,27 @@ export default function Clock(props) {
 	useEffect(() => {
 		if (secondsLeft > 0) return
 
+		let prevPhase = currentPhase.current
 		alarmSoundOn ? alarmSfxRef.current.play() : null
+
 		currentPhase.current = setNextPhase()
 		sendCurrentPhaseInfo(currentPhase.current)
 
-		if (!autoStart) {
-			backgroundSoundOn ? backgroundSfxRef.current.pause() : null
-			resetClock()
+		if (autoStart && backgroundSoundOn) {
+			prevPhase === 'focus' ? backgroundSfxRef.current.pause() : backgroundSfxRef.current.play()
+			setSecondsLeft(setTimeValues(currentPhase.current))
 			return
 		}
 
-		if (backgroundSoundOn) {
-			currentPhase.current === 'focus' ? backgroundSfxRef.current.pause() : backgroundSfxRef.current.play()
-		}
-
-		setSecondsLeft(setTimeValues(currentPhase.current))
+		if (backgroundSoundOn) backgroundSfxRef.current.pause()
+		resetClock()
 	}, [secondsLeft])
 
 	// Clock functions
 	const startClock = () => {
-		if ((currentPhase.current === 'focus') & backgroundSoundOn) backgroundSfxRef.current.play()
+		if ((currentPhase.current === 'focus') & backgroundSoundOn) {
+			backgroundSfxRef.current.play()
+		}
 
 		clockInterval.current = setInterval(() => {
 			setSecondsLeft(prevSecondsLeft => prevSecondsLeft - 1)
@@ -112,13 +117,11 @@ export default function Clock(props) {
 		Math.floor(secondsLeft / 60) < 10 ? `0${Math.floor(secondsLeft / 60)}` : `${Math.floor(secondsLeft / 60)}`
 	const formattedSeconds = secondsLeft % 60 < 10 ? `0${secondsLeft % 60}` : `${secondsLeft % 60}`
 
-	backgroundSfxRef.current.volume = backgroundVolume
-
 	return (
 		<>
 			<audio src={clickSfx} ref={clickSfxRef} />
 			<audio src={alarmSfx} ref={alarmSfxRef} />
-			{backgroundSoundOn && <audio loop src={`/src/sfx/${backgroundSfx}.mp3`} ref={backgroundSfxRef} />}
+			<audio loop src={`/src/sfx/${backgroundSfx}.mp3`} ref={backgroundSfxRef} />
 			<div className='timer__btns'>
 				<button onClick={resetClock} className='timer__btn'>
 					<i className='fa-solid fa-arrow-rotate-left'></i>

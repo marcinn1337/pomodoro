@@ -150,10 +150,14 @@ section {
 		margin-block: 1.5em 0.3em;
 		margin-inline: 0.8em;
 		list-style: none;
+		max-height: 225px;
+		overflow-y: scroll;
 		&-item {
 			padding-block: 0.5em;
-			display: flex;
+			display: grid;
+			grid-template-columns: 15px 80% 20px;
 			align-items: center;
+			justify-content: space-evenly;
 			border-bottom: 1px solid colors.$offFontColor;
 			&-checkbox {
 				appearance: none;
@@ -178,6 +182,7 @@ section {
 				}
 			}
 			&-name {
+				word-wrap: break-word;
 				margin-left: 5px;
 				font-size: 1.6rem;
 				font-family: 'Inter', sans-serif;
@@ -246,12 +251,12 @@ section {
 .settings {
 	padding: 0.5em 1em;
 	position: absolute;
+	left: 0;
 	width: 100%;
 	z-index: 10;
 	color: colors.$fontColor;
 	font-family: 'Inter', sans-serif;
 	background-color: colors.$hardGlassColor;
-	overflow: hidden;
 	&__header {
 		position: relative;
 		display: flex;
@@ -425,5 +430,63 @@ section {
 				cursor: pointer;
 			}
 		}
+	}
+}
+
+@media (min-width: 420px) {
+	// To Do List
+	.timer__tasks {
+		&-list {
+			&-item {
+				grid-template-columns: 15px 85% 20px;
+			}
+		}
+	}
+}
+
+@media (min-width: 576px) {
+	// To Do List
+	.timer__tasks {
+		&-list {
+			&-item {
+				grid-template-columns: 15px 90% 20px;
+			}
+		}
+	}
+}
+
+@media (min-width: 1024px) {
+	.timer {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-content: flex-start;
+		justify-content: center;
+	}
+	.timer__btns {
+		width: 100%;
+	}
+	.timer__clock {
+		width: 100%;
+	}
+	// To Do List
+	.timer__tasks {
+		margin-right: 0.7em;
+		min-width: 48%;
+		max-width: 48%;
+		&-list {
+			max-height: 315px;
+			&-item {
+				grid-template-columns: 15px 85% 20px;
+			}
+		}
+	}
+
+	// Quick Notes
+	.timer__notes {
+		height: unset;
+		min-height: 300px;
+		margin-left: 0.7em;
+		min-width: 48%;
+		max-width: 48%;
 	}
 }

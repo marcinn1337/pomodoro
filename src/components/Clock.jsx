@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import alarmSfx from '../sfx/alarmSfx.mp3'
 import clickSfx from '../sfx/clickSfx.mp3'
 
-// Fixed non playing bg sound when autoStart is on
 
 export default function Clock(props) {
 	// Get settings values from local storage

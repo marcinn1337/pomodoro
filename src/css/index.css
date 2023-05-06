@@ -191,15 +191,19 @@ section .section-header h4 {
   margin-block: 1.5em 0.3em;
   margin-inline: 0.8em;
   list-style: none;
+  max-height: 225px;
+  overflow-y: scroll;
 }
 .timer__tasks-list-item {
   padding-block: 0.5em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: grid;
+  grid-template-columns: 15px 80% 20px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   border-bottom: 1px solid rgba(217, 217, 217, 0.1);
 }
 .timer__tasks-list-item-checkbox {
@@ -233,6 +237,7 @@ section .section-header h4 {
           transform: scale(1);
 }
 .timer__tasks-list-item-name {
+  word-wrap: break-word;
   margin-left: 5px;
   font-size: 1.6rem;
   font-family: "Inter", sans-serif;
@@ -300,12 +305,12 @@ section .section-header h4 {
 .settings {
   padding: 0.5em 1em;
   position: absolute;
+  left: 0;
   width: 100%;
   z-index: 10;
   color: rgb(217, 217, 217);
   font-family: "Inter", sans-serif;
   background-color: rgba(0, 0, 0, 0.4);
-  overflow: hidden;
 }
 .settings__header {
   position: relative;
@@ -513,4 +518,54 @@ section .section-header h4 {
   width: 5px;
   height: 15px;
   cursor: pointer;
+}
+
+@media (min-width: 420px) {
+  .timer__tasks-list-item {
+    grid-template-columns: 15px 85% 20px;
+  }
+}
+@media (min-width: 576px) {
+  .timer__tasks-list-item {
+    grid-template-columns: 15px 90% 20px;
+  }
+}
+@media (min-width: 1024px) {
+  .timer {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-line-pack: start;
+        align-content: flex-start;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .timer__btns {
+    width: 100%;
+  }
+  .timer__clock {
+    width: 100%;
+  }
+  .timer__tasks {
+    margin-right: 0.7em;
+    min-width: 48%;
+    max-width: 48%;
+  }
+  .timer__tasks-list {
+    max-height: 315px;
+  }
+  .timer__tasks-list-item {
+    grid-template-columns: 15px 85% 20px;
+  }
+  .timer__notes {
+    height: unset;
+    min-height: 300px;
+    margin-left: 0.7em;
+    min-width: 48%;
+    max-width: 48%;
+  }
 }/*# sourceMappingURL=index.css.map */

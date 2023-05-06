@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import Task from './TaskItem'
-// Fixed addNewTask function
-// Created deleteTask and toggleStatus function
+
 
 function Tasks() {
 	const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('pomodoroTaskList')) || [])

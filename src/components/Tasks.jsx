@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import Task from './TaskItem'
 
-
 function Tasks() {
 	const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('pomodoroTaskList')) || [])
 	const [taskInput, setTaskInput] = useState('')
@@ -41,7 +40,6 @@ function Tasks() {
 					isDone: !currentTask.isDone,
 				}
 			})
-			console.log(newTaskList)
 			return newTaskList
 		})
 	}

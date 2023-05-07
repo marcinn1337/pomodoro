@@ -12,6 +12,17 @@ $border-radius: 15px;
 }
 html {
 	font-size: 62.5%;
+	scrollbar-width: thin;
+	scrollbar-color: colors.$fontColor transparent;
+	&::-webkit-scrollbar {
+		width: 7px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: colors.$fontColor;
+	}
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
 }
 button {
 	background-color: transparent;
@@ -43,10 +54,10 @@ body {
 	z-index: 0;
 	&__background {
 		position: absolute;
+		height: 100vh;
+		width: 100%;
 		top: 0;
-		bottom: 0;
 		left: 0;
-		right: 0;
 		z-index: -10;
 	}
 }
@@ -119,6 +130,7 @@ section {
 		border-bottom: 1px solid colors.$offFontColor;
 		&-input {
 			padding-block: 1em;
+			width: 70%;
 			background-color: transparent;
 			border: none;
 			border-bottom: 1px solid transparent;
@@ -169,6 +181,7 @@ section {
 				height: 0.9em;
 				border-radius: 0.15em;
 				overflow: hidden;
+				cursor: pointer;
 				&::before {
 					content: '';
 					width: 1em;
@@ -187,6 +200,7 @@ section {
 				font-size: 1.6rem;
 				font-family: 'Inter', sans-serif;
 				color: colors.$fontColor;
+				cursor: pointer;
 			}
 			&-delete {
 				padding: 5px 0 5px 10px;
@@ -208,6 +222,15 @@ section {
 			i {
 				color: colors.$offFontColor;
 			}
+		}
+		&::-webkit-scrollbar {
+			width: 5px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: colors.$fontColor;
+		}
+		&::-webkit-scrollbar-track {
+			background-color: colors.$offFontColor;
 		}
 	}
 }
@@ -233,6 +256,15 @@ section {
 			background-color: rgba(0, 0, 0, 0.1);
 			color: colors.$fontColor;
 		}
+		&::-webkit-scrollbar {
+			width: 5px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: colors.$fontColor;
+		}
+		&::-webkit-scrollbar-track {
+			background-color: colors.$offFontColor;
+		}
 	}
 }
 
@@ -249,14 +281,15 @@ section {
 }
 
 .settings {
-	padding: 0.5em 1em;
+	padding: 0.5em 1em 1em;
 	position: absolute;
-	left: 0;
-	width: 100%;
-	z-index: 10;
-	color: colors.$fontColor;
-	font-family: 'Inter', sans-serif;
+	left: 50%;
+	width: 90%;
+	transform: translateX(-50%);
 	background-color: colors.$hardGlassColor;
+	font-family: 'Inter', sans-serif;
+	color: colors.$fontColor;
+	z-index: 10;
 	&__header {
 		position: relative;
 		display: flex;
@@ -315,7 +348,7 @@ section {
 		label {
 			margin-top: 0.5em;
 			padding: 3px 0;
-			min-width: 80%;
+			min-width: 70%;
 			font-size: 1.6rem;
 		}
 		input {
@@ -326,7 +359,7 @@ section {
 		input[type='number'] {
 			-moz-appearance: textfield;
 			padding: 3px 9px;
-			max-width: 20%;
+			max-width: 60px;
 			outline: 1px solid transparent;
 			background-color: colors.$hardGlassColor;
 			color: colors.$subFontColor;
@@ -346,27 +379,33 @@ section {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: clamp(20%, 20%, 20%);
-			background-color: colors.$hardGlassColor;
+			min-width: 60px;
+			max-width: 60px;
+			background-color: colors.$offFontColor;
 			height: 20px;
+			transition: background-color 0.2s;
 			&::before {
 				content: '';
 				width: 23px;
 				height: 23px;
 				border-radius: 50%;
-				transform: translateX(-70%);
-				background-color: colors.$subFontColor;
+				transform: translateX(-75%);
+				background-color: #7a7a7a;
 				transition: transform 0.2s, background-color 0.2s;
+			}
+			&:checked {
+				background-color: colors.$subFontColor;
 			}
 			&:checked::before {
 				background-color: colors.$fontColor;
-				transform: translateX(70%);
+				transform: translateX(75%);
 			}
 		}
 		.color-preview {
 			appearance: none;
 			height: 20px;
-			width: 20%;
+			min-width: 100px;
+			max-width: 100px;
 			background-color: #4da78c;
 		}
 		.color-range {
@@ -447,9 +486,114 @@ section {
 @media (min-width: 576px) {
 	// To Do List
 	.timer__tasks {
+		&-form {
+			&-input {
+				width: 80%;
+			}
+		}
 		&-list {
 			&-item {
 				grid-template-columns: 15px 90% 20px;
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.settings {
+		max-width: 700px;
+	}
+}
+
+@media (min-width: 992px) {
+	.timer__tasks {
+		margin-block-start: 1em;
+		background-color: colors.$glassColor;
+		border-radius: $border-radius;
+		overflow: hidden;
+		&-form {
+			margin-inline: 0.8em;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: 1px solid colors.$offFontColor;
+			&-input {
+				padding-block: 1em;
+				background-color: transparent;
+				border: none;
+				border-bottom: 1px solid transparent;
+				font-family: 'Inter', sans-serif;
+				font-size: 1.4rem;
+				color: colors.$fontColor;
+				&::placeholder {
+					color: colors.$subFontColor;
+				}
+				&:focus {
+					outline: none;
+					border-bottom: 1px solid colors.$fontColor;
+				}
+			}
+			&-btn {
+				padding: 0.4em 1.2em;
+				border: 1px solid colors.$subFontColor;
+				border-radius: 20px;
+				color: colors.$subFontColor;
+				font-family: 'Inter', sans-serif;
+				font-size: 1.3rem;
+				&:focus {
+					border: 1px solid colors.$fontColor;
+					color: 1px solid colors.$fontColor;
+				}
+			}
+		}
+		&-list {
+			margin-block: 1.5em 0.3em;
+			margin-inline: 0.8em;
+			list-style: none;
+			max-height: 225px;
+			overflow-y: scroll;
+			&-item {
+				padding-block: 0.5em;
+				display: grid;
+				grid-template-columns: 15px 80% 20px;
+				align-items: center;
+				justify-content: space-evenly;
+				border-bottom: 1px solid colors.$offFontColor;
+				&-checkbox {
+					appearance: none;
+					display: grid;
+					place-content: center;
+					background-color: transparent;
+					border: 2px solid colors.$subFontColor;
+					width: 0.9em;
+					height: 0.9em;
+					border-radius: 0.15em;
+					overflow: hidden;
+					&::before {
+						content: '';
+						width: 1em;
+						height: 1em;
+						transform: scale(0);
+						transition: 150ms transform ease-in-out;
+						box-shadow: inset 1em 1em colors.$subFontColor;
+					}
+					&:checked::before {
+						transform: scale(1);
+					}
+				}
+				&-name {
+					word-wrap: break-word;
+					margin-left: 5px;
+					font-size: 1.6rem;
+					font-family: 'Inter', sans-serif;
+					color: colors.$fontColor;
+				}
+				&-delete i {
+					transition: color 0.1s;
+					&:hover {
+						color: colors.$fontColor;
+					}
+				}
 			}
 		}
 	}

@@ -14,17 +14,20 @@ function Timer() {
 	const fetchCurrentPhase = phase => {
 		setCurrentPhase(phase)
 	}
+
 	return (
-		<div className='timer'>
+		<>
 			<Background currentPhase={currentPhase} />
-			<button onClick={toggleSettings} className='timer__open-settings-btn'>
-				<i className='fa-solid fa-gear'></i>
-			</button>
-			<Clock fetchCurrentPhase={fetchCurrentPhase} />
-			<Tasks />
-			<QuickNotes />
-			{activeSettings && <Settings toggleSettings={toggleSettings} />}
-		</div>
+			<div className='timer'>
+				<button onClick={toggleSettings} className='timer__open-settings-btn'>
+					<i className='fa-solid fa-gear'></i>
+				</button>
+				<Clock fetchCurrentPhase={fetchCurrentPhase} />
+				<Tasks />
+				<QuickNotes />
+				{activeSettings && <Settings toggleSettings={toggleSettings} />}
+			</div>
+		</>
 	)
 }
 

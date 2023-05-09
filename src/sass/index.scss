@@ -37,29 +37,32 @@ i {
 	font-size: 2.5rem;
 }
 body {
+	min-height: 100vh;
 	font-size: 1.6rem;
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
 }
 
+.background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-height: 100vh;
+	width: 100%;
+	z-index: -10;
+}
 .timer {
-	position: relative;
 	padding-block: 1em;
 	padding-inline: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
 	min-height: 100vh;
-	background-color: transparent;
+	width: 100%;
 	z-index: 0;
-	&__background {
-		position: absolute;
-		height: 100vh;
-		width: 100%;
-		top: 0;
-		left: 0;
-		z-index: -10;
-	}
 }
 // Timer open settings btn
 .timer__open-settings-btn {
@@ -269,24 +272,25 @@ section {
 }
 
 // SETTINGS
-.background {
+.settings-background {
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	right: 0;
 	left: 0;
-	background-color: colors.$hardGlassColor;
-	backdrop-filter: blur(7px);
-	z-index: 1;
+	right: 0;
+	min-height: 100vh;
+	background-color: #1a1a1a;
+	z-index: 0;
 }
 
 .settings {
+	margin-block-start: 0;
 	padding: 0.5em 1em 1em;
 	position: absolute;
-	left: 50%;
-	width: 90%;
-	transform: translateX(-50%);
-	background-color: colors.$hardGlassColor;
+	top: 0;
+	left: 0;
+	background-color: #1a1a1a;
+	border-radius: 0;
 	font-family: 'Inter', sans-serif;
 	color: colors.$fontColor;
 	z-index: 10;
@@ -295,6 +299,7 @@ section {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		max-width: 786px;
 		&::before {
 			content: '';
 			position: absolute;
@@ -338,6 +343,7 @@ section {
 		justify-content: space-between;
 		align-items: center;
 		align-content: center;
+		max-width: 786px;
 		&-title {
 			margin-bottom: 0.5em;
 			width: 100%;
@@ -389,7 +395,7 @@ section {
 				width: 23px;
 				height: 23px;
 				border-radius: 50%;
-				transform: translateX(-75%);
+				transform: translateX(-80%);
 				background-color: #7a7a7a;
 				transition: transform 0.2s, background-color 0.2s;
 			}
@@ -398,7 +404,7 @@ section {
 			}
 			&:checked::before {
 				background-color: colors.$fontColor;
-				transform: translateX(75%);
+				transform: translateX(80%);
 			}
 		}
 		.color-preview {
@@ -501,10 +507,11 @@ section {
 
 @media (min-width: 768px) {
 	.settings {
-		max-width: 700px;
+		min-width: 768px;
+		left: 50%;
+		transform: translate(-50%);
 	}
 }
-
 @media (min-width: 992px) {
 	.timer__tasks {
 		margin-block-start: 1em;

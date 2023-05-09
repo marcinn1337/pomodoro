@@ -43,7 +43,7 @@ export default function Settings(props) {
 	}
 	return (
 		<>
-			<div className='background'></div>
+			<div className='settings-background'></div>
 			<section className='settings'>
 				<div className='settings__header'>
 					<h2 className='settings__header-title'>Settings</h2>

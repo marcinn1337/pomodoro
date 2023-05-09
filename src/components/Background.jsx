@@ -20,5 +20,6 @@ export default function Background(props) {
 	const styles = {
 		background: getCurrentBg(),
 	}
-	return <div style={styles} className='timer__background'></div>
+
+	return <div style={styles} className='background'></div>
 }

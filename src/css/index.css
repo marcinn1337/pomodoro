@@ -38,15 +38,27 @@ i {
 }
 
 body {
+  min-height: 100vh;
   font-size: 1.6rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  z-index: -10;
+}
+
 .timer {
-  position: relative;
   padding-block: 1em;
   padding-inline: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -58,16 +70,8 @@ body {
       -ms-flex-align: stretch;
           align-items: stretch;
   min-height: 100vh;
-  background-color: transparent;
-  z-index: 0;
-}
-.timer__background {
-  position: absolute;
-  height: 100vh;
   width: 100%;
-  top: 0;
-  left: 0;
-  z-index: -10;
+  z-index: 0;
 }
 
 .timer__open-settings-btn {
@@ -322,26 +326,26 @@ section .section-header h4 {
   background-color: rgba(217, 217, 217, 0.2);
 }
 
-.background {
+.settings-background {
   position: fixed;
   top: 0;
   bottom: 0;
-  right: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  -webkit-backdrop-filter: blur(7px);
-          backdrop-filter: blur(7px);
-  z-index: 1;
+  right: 0;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  z-index: 0;
 }
 
 .settings {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
   padding: 0.5em 1em 1em;
   position: absolute;
-  left: 50%;
-  width: 90%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  background-color: #1a1a1a;
+  border-radius: 0;
   font-family: "Inter", sans-serif;
   color: rgb(217, 217, 217);
   z-index: 10;
@@ -357,6 +361,7 @@ section .section-header h4 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  max-width: 786px;
 }
 .settings__header::before {
   content: "";
@@ -407,6 +412,7 @@ section .section-header h4 {
           align-items: center;
   -ms-flex-line-pack: center;
       align-content: center;
+  max-width: 786px;
 }
 .settings__section-title {
   margin-bottom: 0.5em;
@@ -480,8 +486,8 @@ section .section-header h4 {
   width: 23px;
   height: 23px;
   border-radius: 50%;
-  -webkit-transform: translateX(-75%);
-          transform: translateX(-75%);
+  -webkit-transform: translateX(-80%);
+          transform: translateX(-80%);
   background-color: #7a7a7a;
   -webkit-transition: background-color 0.2s, -webkit-transform 0.2s;
   transition: background-color 0.2s, -webkit-transform 0.2s;
@@ -493,8 +499,8 @@ section .section-header h4 {
 }
 .settings__section .switch:checked::before {
   background-color: rgb(217, 217, 217);
-  -webkit-transform: translateX(75%);
-          transform: translateX(75%);
+  -webkit-transform: translateX(80%);
+          transform: translateX(80%);
 }
 .settings__section .color-preview {
   -webkit-appearance: none;
@@ -576,7 +582,10 @@ section .section-header h4 {
 }
 @media (min-width: 768px) {
   .settings {
-    max-width: 700px;
+    min-width: 768px;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+            transform: translate(-50%);
   }
 }
 @media (min-width: 992px) {

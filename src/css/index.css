@@ -38,27 +38,14 @@ i {
 }
 
 body {
-  min-height: 100vh;
   font-size: 1.6rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-height: 100vh;
-  width: 100%;
-  z-index: -10;
-}
-
 .timer {
   padding-block: 1em;
   padding-inline: 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -69,9 +56,8 @@ body {
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
-  min-height: 100vh;
-  width: 100%;
   z-index: 0;
+  min-height: 100vh;
 }
 
 .timer__open-settings-btn {
@@ -431,6 +417,7 @@ section .section-header h4 {
   margin-top: 0.5em;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 .settings__section input[type=number] {
   -moz-appearance: textfield;
@@ -507,7 +494,7 @@ section .section-header h4 {
      -moz-appearance: none;
           appearance: none;
   height: 20px;
-  min-width: 100px;
+  min-width: 60px;
   max-width: 100px;
   background-color: #4da78c;
 }
@@ -553,7 +540,6 @@ section .section-header h4 {
           transform: scaleY(1);
 }
 .settings__section .volume-range {
-  position: relative;
   -webkit-appearance: none;
   height: 10px;
   width: 100%;
@@ -566,7 +552,110 @@ section .section-header h4 {
   height: 15px;
   cursor: pointer;
 }
+.settings input::-webkit-outer-spin-button,
+.settings input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.settings input[type=number] {
+  -moz-appearance: textfield;
+}
 
+.alert {
+  padding: 1em 2em;
+  position: fixed;
+  bottom: 0.5em;
+  left: 50%;
+  display: grid;
+  grid-template-columns: 70px auto;
+  grid-template-rows: 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: calc(100% - 20px);
+  max-width: 650px;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  -webkit-transform: translateX(-150%);
+          transform: translateX(-150%);
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(217, 217, 217);
+  -webkit-animation: alertSlide 4s both;
+          animation: alertSlide 4s both;
+}
+.alert p {
+  font-family: "Inter", sans-serif;
+  font-size: 1.8rem;
+}
+.alert i {
+  font-size: 3.5rem;
+}
+
+@-webkit-keyframes alertSlide {
+  0% {
+    -webkit-transform: translateX(200%);
+            transform: translateX(200%);
+    opacity: 1;
+  }
+  7% {
+    -webkit-transform: translateX(-55%);
+            transform: translateX(-55%);
+    opacity: 1;
+  }
+  10% {
+    -webkit-transform: translateX(-45%);
+            transform: translateX(-45%);
+    opacity: 1;
+  }
+  12% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    opacity: 1;
+  }
+  90% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    opacity: 0;
+  }
+}
+
+@keyframes alertSlide {
+  0% {
+    -webkit-transform: translateX(200%);
+            transform: translateX(200%);
+    opacity: 1;
+  }
+  7% {
+    -webkit-transform: translateX(-55%);
+            transform: translateX(-55%);
+    opacity: 1;
+  }
+  10% {
+    -webkit-transform: translateX(-45%);
+            transform: translateX(-45%);
+    opacity: 1;
+  }
+  12% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    opacity: 1;
+  }
+  90% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    opacity: 0;
+  }
+}
 @media (min-width: 420px) {
   .timer__tasks-list-item {
     grid-template-columns: 15px 85% 20px;
@@ -578,6 +667,12 @@ section .section-header h4 {
   }
   .timer__tasks-list-item {
     grid-template-columns: 15px 90% 20px;
+  }
+  .settings__section label:last-of-type {
+    min-width: 30%;
+  }
+  .settings__section .volume-range {
+    max-width: 250px;
   }
 }
 @media (min-width: 768px) {
@@ -735,8 +830,7 @@ section .section-header h4 {
   }
   .timer__tasks {
     margin-right: 0.7em;
-    min-width: 48%;
-    max-width: 48%;
+    width: clamp(490px, 48%, 850px);
   }
   .timer__tasks-list {
     max-height: 315px;
@@ -748,7 +842,6 @@ section .section-header h4 {
     height: unset;
     min-height: 300px;
     margin-left: 0.7em;
-    min-width: 48%;
-    max-width: 48%;
+    width: clamp(490px, 48%, 850px);
   }
 }/*# sourceMappingURL=index.css.map */

@@ -1,19 +1,30 @@
 import { useState, useEffect, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import Task from './TaskItem'
+import Alert from './Alert'
 
 function Tasks() {
 	const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('pomodoroTaskList')) || [])
 	const [taskInput, setTaskInput] = useState('')
 	const updateInput = e => setTaskInput(e.target.value)
+	const [isAlertOn, setIsAlertOn] = useState(false)
 
-	// Save taskList to local storage when taskList is updated
+	// Save [taskList] to local storage when task list is updated
 	useEffect(() => {
 		localStorage.setItem('pomodoroTaskList', JSON.stringify(taskList))
 	}, [taskList])
 
 	// Add new task to the beginning of task list
-	const addNewTask = () => {
+	const addNewTask = e => {
+		e.preventDefault()
+		if (taskInput.length <= 3 || taskInput.length > 60) {
+			setIsAlertOn(true)
+			setTimeout(() => {
+				setIsAlertOn(false)
+			}, 4000)
+			return
+		}
+
 		setTaskList(prevTaskList => [
 			{
 				id: nanoid(),
@@ -61,7 +72,7 @@ function Tasks() {
 				<i className='fa-solid fa-file-lines'></i>
 				<h4 className='timer__tasks-header-title'>Tasks</h4>
 			</div>
-			<form className='timer__tasks-form'>
+			<form onSubmit={addNewTask} className='timer__tasks-form'>
 				<input
 					value={taskInput}
 					onChange={updateInput}
@@ -69,11 +80,12 @@ function Tasks() {
 					placeholder='Type task description...'
 					className='timer__tasks-form-input'
 				/>
-				<button type='button' onClick={addNewTask} className='timer__tasks-form-btn'>
+				<button onClick={addNewTask} className='timer__tasks-form-btn'>
 					Add
 				</button>
 			</form>
 			<ul className='timer__tasks-list'>{JSXtaskItems}</ul>
+			{isAlertOn && <Alert />}
 		</section>
 	)
 }

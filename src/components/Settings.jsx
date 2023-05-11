@@ -27,8 +27,29 @@ export default function Settings(props) {
 		localStorage.setItem('pomodoroSettings', JSON.stringify(settings))
 	}, [settings])
 
+	const checkForError = () => {
+		// Check if any number input has value lower than 1 min
+		if (settings.focusTime < 1 || settings.shortBreakTime < 1 || settings.longBreakTime < 1) {
+			console.log('elo1')
+		}
+
+		// Check if any number input has value higher than 60min
+		if (settings.focusTime > 60 || settings.shortBreakTime > 60 || settings.longBreakTime > 60) {
+			console.log('elo2')
+		}
+
+		// Check if any number input has empty value
+		if (settings.focusTime == '' || settings.shortBreakTime == '' || settings.longBreakTime == '') {
+			console.log('elo3')
+		}
+	}
+	const closeSettings = () => {
+		checkForError()
+		// props.toggleSettings()
+	}
 	const updateSettings = e => {
 		const { name, value, type, checked } = e.target
+
 		setSettings(prevSettings => {
 			return {
 				...prevSettings,
@@ -47,7 +68,7 @@ export default function Settings(props) {
 			<section className='settings'>
 				<div className='settings__header'>
 					<h2 className='settings__header-title'>Settings</h2>
-					<button onClick={props.toggleSettings} className='settings__header-close'>
+					<button onClick={closeSettings} className='settings__header-close'>
 						<i className='fa-solid fa-xmark'></i>
 					</button>
 				</div>

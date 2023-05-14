@@ -4,15 +4,10 @@ import clickSfx from '../sfx/clickSfx.mp3'
 
 export default function Clock(props) {
 	// Get settings values from local storage
-	// const [timeValues, changeTimeValues] = useState({
-	// 	focusTime: JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime,
-	// 	shortBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).shortBreakTime,
-	// 	longBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).longBreakTime,
-	// })
 	const timeValues = {
-		focusTime: JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime,
-		shortBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).shortBreakTime,
-		longBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).longBreakTime,
+		focusTime: JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime * 60,
+		shortBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).shortBreakTime * 60,
+		longBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).longBreakTime * 60,
 	}
 
 	const autoStart = JSON.parse(localStorage.getItem('pomodoroSettings')).autoStart
@@ -84,7 +79,7 @@ export default function Clock(props) {
 
 		clockInterval.current = setInterval(() => {
 			setSecondsLeft(prevSecondsLeft => prevSecondsLeft - 1)
-		}, 500)
+		}, 1000)
 	}
 	const stopClock = () => {
 		if (backgroundSoundOn) backgroundSfxRef.current.pause()

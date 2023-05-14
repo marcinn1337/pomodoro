@@ -44,6 +44,7 @@ body {
 }
 
 .timer {
+  position: relative;
   padding-block: 1em;
   padding-inline: 10px;
   display: -webkit-box;
@@ -184,10 +185,6 @@ section .section-header h4 {
   color: rgba(217, 217, 217, 0.5);
   font-family: "Inter", sans-serif;
   font-size: 1.3rem;
-}
-.timer__tasks-form-btn:focus {
-  border: 1px solid rgb(217, 217, 217);
-  color: 1px solid rgb(217, 217, 217);
 }
 .timer__tasks-list {
   margin-block: 1.5em 0.3em;
@@ -686,127 +683,35 @@ section .section-header h4 {
   }
 }
 @media (min-width: 992px) {
-  .timer__tasks {
-    -webkit-margin-before: 1em;
-            margin-block-start: 1em;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    overflow: hidden;
+  .timer__btns .timer__btn {
+    -webkit-transition: color 0.1s, -webkit-transform 0.1s;
+    transition: color 0.1s, -webkit-transform 0.1s;
+    transition: transform 0.1s, color 0.1s;
+    transition: transform 0.1s, color 0.1s, -webkit-transform 0.1s;
   }
-  .timer__tasks-form {
-    margin-inline: 0.8em;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    border-bottom: 1px solid rgba(217, 217, 217, 0.2);
+  .timer__btns .timer__btn:hover {
+    color: white;
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
   }
-  .timer__tasks-form-input {
-    padding-block: 1em;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid transparent;
-    font-family: "Inter", sans-serif;
-    font-size: 1.4rem;
-    color: rgb(217, 217, 217);
+  .timer__open-settings-btn {
+    right: 10px;
+    -webkit-transition: color 0.1s, -webkit-transform 0.3s;
+    transition: color 0.1s, -webkit-transform 0.3s;
+    transition: transform 0.3s, color 0.1s;
+    transition: transform 0.3s, color 0.1s, -webkit-transform 0.3s;
   }
-  .timer__tasks-form-input::-webkit-input-placeholder {
-    color: rgba(217, 217, 217, 0.5);
-  }
-  .timer__tasks-form-input::-moz-placeholder {
-    color: rgba(217, 217, 217, 0.5);
-  }
-  .timer__tasks-form-input:-ms-input-placeholder {
-    color: rgba(217, 217, 217, 0.5);
-  }
-  .timer__tasks-form-input::-ms-input-placeholder {
-    color: rgba(217, 217, 217, 0.5);
-  }
-  .timer__tasks-form-input::placeholder {
-    color: rgba(217, 217, 217, 0.5);
-  }
-  .timer__tasks-form-input:focus {
-    outline: none;
-    border-bottom: 1px solid rgb(217, 217, 217);
+  .timer__open-settings-btn:hover {
+    color: white;
+    -webkit-transform: rotate(120deg);
+            transform: rotate(120deg);
   }
   .timer__tasks-form-btn {
-    padding: 0.4em 1.2em;
-    border: 1px solid rgba(217, 217, 217, 0.5);
-    border-radius: 20px;
-    color: rgba(217, 217, 217, 0.5);
-    font-family: "Inter", sans-serif;
-    font-size: 1.3rem;
+    -webkit-transition: color 0.1s, border 0.1s;
+    transition: color 0.1s, border 0.1s;
   }
-  .timer__tasks-form-btn:focus {
+  .timer__tasks-form-btn:hover {
     border: 1px solid rgb(217, 217, 217);
-    color: 1px solid rgb(217, 217, 217);
-  }
-  .timer__tasks-list {
-    margin-block: 1.5em 0.3em;
-    margin-inline: 0.8em;
-    list-style: none;
-    max-height: 225px;
-    overflow-y: scroll;
-  }
-  .timer__tasks-list-item {
-    padding-block: 0.5em;
-    display: grid;
-    grid-template-columns: 15px 80% 20px;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
-    border-bottom: 1px solid rgba(217, 217, 217, 0.2);
-  }
-  .timer__tasks-list-item-checkbox {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-    display: grid;
-    place-content: center;
-    background-color: transparent;
-    border: 2px solid rgba(217, 217, 217, 0.5);
-    width: 0.9em;
-    height: 0.9em;
-    border-radius: 0.15em;
-    overflow: hidden;
-  }
-  .timer__tasks-list-item-checkbox::before {
-    content: "";
-    width: 1em;
-    height: 1em;
-    -webkit-transform: scale(0);
-            transform: scale(0);
-    -webkit-transition: 150ms -webkit-transform ease-in-out;
-    transition: 150ms -webkit-transform ease-in-out;
-    transition: 150ms transform ease-in-out;
-    transition: 150ms transform ease-in-out, 150ms -webkit-transform ease-in-out;
-    -webkit-box-shadow: inset 1em 1em rgba(217, 217, 217, 0.5);
-            box-shadow: inset 1em 1em rgba(217, 217, 217, 0.5);
-  }
-  .timer__tasks-list-item-checkbox:checked::before {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  .timer__tasks-list-item-name {
-    word-wrap: break-word;
-    margin-left: 5px;
-    font-size: 1.6rem;
-    font-family: "Inter", sans-serif;
-    color: rgb(217, 217, 217);
-  }
-  .timer__tasks-list-item-delete i {
-    -webkit-transition: color 0.1s;
-    transition: color 0.1s;
-  }
-  .timer__tasks-list-item-delete i:hover {
     color: rgb(217, 217, 217);
   }
 }

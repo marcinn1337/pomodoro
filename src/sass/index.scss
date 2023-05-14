@@ -43,6 +43,7 @@ body {
 }
 
 .timer {
+	position: relative;
 	padding-block: 1em;
 	padding-inline: 10px;
 	display: flex;
@@ -142,10 +143,6 @@ section {
 			color: colors.$subFontColor;
 			font-family: 'Inter', sans-serif;
 			font-size: 1.3rem;
-			&:focus {
-				border: 1px solid colors.$fontColor;
-				color: 1px solid colors.$fontColor;
-			}
 		}
 	}
 	&-list {
@@ -573,93 +570,30 @@ section {
 	}
 }
 @media (min-width: 992px) {
-	.timer__tasks {
-		margin-block-start: 1em;
-		background-color: colors.$glassColor;
-		border-radius: $border-radius;
-		overflow: hidden;
-		&-form {
-			margin-inline: 0.8em;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			border-bottom: 1px solid colors.$offFontColor;
-			&-input {
-				padding-block: 1em;
-				background-color: transparent;
-				border: none;
-				border-bottom: 1px solid transparent;
-				font-family: 'Inter', sans-serif;
-				font-size: 1.4rem;
-				color: colors.$fontColor;
-				&::placeholder {
-					color: colors.$subFontColor;
-				}
-				&:focus {
-					outline: none;
-					border-bottom: 1px solid colors.$fontColor;
-				}
-			}
-			&-btn {
-				padding: 0.4em 1.2em;
-				border: 1px solid colors.$subFontColor;
-				border-radius: 20px;
-				color: colors.$subFontColor;
-				font-family: 'Inter', sans-serif;
-				font-size: 1.3rem;
-				&:focus {
-					border: 1px solid colors.$fontColor;
-					color: 1px solid colors.$fontColor;
-				}
+	.timer__btns {
+		.timer__btn {
+			transition: transform 0.1s, color 0.1s;
+			&:hover {
+				color: white;
+				transform: scale(1.1);
 			}
 		}
-		&-list {
-			margin-block: 1.5em 0.3em;
-			margin-inline: 0.8em;
-			list-style: none;
-			max-height: 225px;
-			overflow-y: scroll;
-			&-item {
-				padding-block: 0.5em;
-				display: grid;
-				grid-template-columns: 15px 80% 20px;
-				align-items: center;
-				justify-content: space-evenly;
-				border-bottom: 1px solid colors.$offFontColor;
-				&-checkbox {
-					appearance: none;
-					display: grid;
-					place-content: center;
-					background-color: transparent;
-					border: 2px solid colors.$subFontColor;
-					width: 0.9em;
-					height: 0.9em;
-					border-radius: 0.15em;
-					overflow: hidden;
-					&::before {
-						content: '';
-						width: 1em;
-						height: 1em;
-						transform: scale(0);
-						transition: 150ms transform ease-in-out;
-						box-shadow: inset 1em 1em colors.$subFontColor;
-					}
-					&:checked::before {
-						transform: scale(1);
-					}
-				}
-				&-name {
-					word-wrap: break-word;
-					margin-left: 5px;
-					font-size: 1.6rem;
-					font-family: 'Inter', sans-serif;
+	}
+	.timer__open-settings-btn {
+		right: 10px;
+		transition: transform 0.3s, color 0.1s;
+		&:hover {
+			color: white;
+			transform: rotate(120deg);
+		}
+	}
+	.timer__tasks {
+		&-form {
+			&-btn {
+				transition: color 0.1s, border 0.1s;
+				&:hover {
+					border: 1px solid colors.$fontColor;
 					color: colors.$fontColor;
-				}
-				&-delete i {
-					transition: color 0.1s;
-					&:hover {
-						color: colors.$fontColor;
-					}
 				}
 			}
 		}

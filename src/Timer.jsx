@@ -10,6 +10,12 @@ function Timer() {
 	const [activeSettings, setActiveSettings] = useState(false)
 	const [currentPhase, setCurrentPhase] = useState('focus')
 	const toggleSettings = () => {
+		if (activeSettings) {
+			setIsAlertOn(true)
+			setTimeout(() => {
+				setIsAlertOn(false)
+			}, 4000)
+		}
 		setActiveSettings(prevActiveSettings => !prevActiveSettings)
 	}
 	const fetchCurrentPhase = phase => {
@@ -37,8 +43,6 @@ function Timer() {
 	const styles = {
 		background: getCurrentBg(),
 	}
-	console.log(JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime)
-	console.log(activeSettings)
 	return (
 		<div className='timer' style={styles}>
 			<button onClick={toggleSettings} className='timer__open-settings-btn'>
@@ -48,7 +52,7 @@ function Timer() {
 			<Tasks />
 			<QuickNotes />
 			{activeSettings && <Settings toggleSettings={toggleSettings} />}
-			{isAlertOn && <Alert message={4}/>}
+			{isAlertOn && <Alert message={4} />}
 		</div>
 	)
 }

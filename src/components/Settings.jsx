@@ -6,9 +6,9 @@ const initDefaultSettings = () => {
 	localStorage.setItem(
 		'pomodoroSettings',
 		JSON.stringify({
-			focusTime: 10,
-			shortBreakTime: 15,
-			longBreakTime: 20,
+			focusTime: 25,
+			shortBreakTime: 5,
+			longBreakTime: 15,
 			autoStart: false,
 			focusBgHue: 340,
 			shortBreakBgHue: 162,

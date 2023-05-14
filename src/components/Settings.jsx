@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import Alert from './Alert'
 
 // Init settings to avoid crash
 const initDefaultSettings = () => {
@@ -23,29 +24,52 @@ if (!localStorage.getItem('pomodoroSettings')) initDefaultSettings()
 
 export default function Settings(props) {
 	const [settings, setSettings] = useState(JSON.parse(localStorage.getItem('pomodoroSettings')))
+	const [isAlertOn, setIsAlertOn] = useState(false)
+	const alertMessage = useRef()
+
 	useEffect(() => {
 		localStorage.setItem('pomodoroSettings', JSON.stringify(settings))
 	}, [settings])
 
 	const checkForError = () => {
-		// Check if any number input has value lower than 1 min
-		if (settings.focusTime < 1 || settings.shortBreakTime < 1 || settings.longBreakTime < 1) {
-			console.log('elo1')
+		if (settings.focusTime === '' || settings.shortBreakTime === '' || settings.longBreakTime === '') {
+			// Check if any number input has empty or different than numeric value
+			return 1
+		} else if (
+			settings.focusTime < 1 ||
+			settings.shortBreakTime < 1 ||
+			settings.longBreakTime < 1 ||
+			settings.focusTime > 60 ||
+			settings.shortBreakTime > 60 ||
+			settings.longBreakTime > 60
+		) {
+			// Check if any number input has value between 1-60
+			return 2
 		}
-
-		// Check if any number input has value higher than 60min
-		if (settings.focusTime > 60 || settings.shortBreakTime > 60 || settings.longBreakTime > 60) {
-			console.log('elo2')
-		}
-
-		// Check if any number input has empty value
-		if (settings.focusTime == '' || settings.shortBreakTime == '' || settings.longBreakTime == '') {
-			console.log('elo3')
-		}
+		return false
 	}
 	const closeSettings = () => {
-		checkForError()
-		// props.toggleSettings()
+		const settingsHasError = checkForError()
+
+		// If there is no errors, close settings
+		if (!settingsHasError) {
+			props.toggleSettings()
+			return
+		}
+
+		// Set alert message and display alert
+		switch (settingsHasError) {
+			case 1:
+				alertMessage.current = 1
+				break
+			case 2:
+				alertMessage.current = 2
+				break
+		}
+		setIsAlertOn(true)
+		setTimeout(() => {
+			setIsAlertOn(false)
+		}, 4000)
 	}
 	const updateSettings = e => {
 		const { name, value, type, checked } = e.target
@@ -175,6 +199,7 @@ export default function Settings(props) {
 						className='volume-range'
 					/>
 				</div>
+				{isAlertOn && <Alert message={alertMessage.current} />}
 			</section>
 		</>
 	)

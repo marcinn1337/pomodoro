@@ -490,6 +490,7 @@ section {
 	transform: translateX(-150%);
 	border-radius: $border-radius;
 	background-color: colors.$hardGlassColor;
+	backdrop-filter: blur(6px);
 	color: colors.$fontColor;
 	animation: alertSlide 4s both;
 	p {

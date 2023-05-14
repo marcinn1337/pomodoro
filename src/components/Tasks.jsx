@@ -85,7 +85,7 @@ function Tasks() {
 				</button>
 			</form>
 			<ul className='timer__tasks-list'>{JSXtaskItems}</ul>
-			{isAlertOn && <Alert />}
+			{isAlertOn && <Alert message={3} />}
 		</section>
 	)
 }

@@ -3,8 +3,10 @@ import Settings from './components/Settings'
 import Clock from './components/Clock'
 import Tasks from './components/Tasks'
 import QuickNotes from './components/QuickNotes'
+import Alert from './components/Alert'
 
 function Timer() {
+	const [isAlertOn, setIsAlertOn] = useState(false)
 	const [activeSettings, setActiveSettings] = useState(false)
 	const [currentPhase, setCurrentPhase] = useState('focus')
 	const toggleSettings = () => {
@@ -35,18 +37,19 @@ function Timer() {
 	const styles = {
 		background: getCurrentBg(),
 	}
+	console.log(JSON.parse(localStorage.getItem('pomodoroSettings')).focusTime)
+	console.log(activeSettings)
 	return (
-		<>
-			<div className='timer' style={styles}>
-				<button onClick={toggleSettings} className='timer__open-settings-btn'>
-					<i className='fa-solid fa-gear'></i>
-				</button>
-				<Clock fetchCurrentPhase={fetchCurrentPhase} />
-				<Tasks />
-				<QuickNotes />
-				{activeSettings && <Settings toggleSettings={toggleSettings} />}
-			</div>
-		</>
+		<div className='timer' style={styles}>
+			<button onClick={toggleSettings} className='timer__open-settings-btn'>
+				<i className='fa-solid fa-gear'></i>
+			</button>
+			<Clock fetchCurrentPhase={fetchCurrentPhase} />
+			<Tasks />
+			<QuickNotes />
+			{activeSettings && <Settings toggleSettings={toggleSettings} />}
+			{isAlertOn && <Alert message={4}/>}
+		</div>
 	)
 }
 

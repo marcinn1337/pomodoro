@@ -579,6 +579,8 @@ section .section-header h4 {
           transform: translateX(-150%);
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
   color: rgb(217, 217, 217);
   -webkit-animation: alertSlide 4s both;
           animation: alertSlide 4s both;

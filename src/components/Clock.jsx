@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import alarmSfx from '../sfx/alarmSfx.mp3'
 import clickSfx from '../sfx/clickSfx.mp3'
+import rain1 from '../sfx/rain1.mp3'
+import rain2 from '../sfx/rain2.mp3'
+import ticking from '../sfx/ticking.mp3'
+import waves from '../sfx/waves.mp3'
 
 export default function Clock(props) {
 	// Get settings values from local storage
@@ -9,12 +13,10 @@ export default function Clock(props) {
 		shortBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).shortBreakTime * 60,
 		longBreakTime: JSON.parse(localStorage.getItem('pomodoroSettings')).longBreakTime * 60,
 	}
-
 	const autoStart = JSON.parse(localStorage.getItem('pomodoroSettings')).autoStart
 	const backgroundSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundSoundOn
 	const alarmSoundOn = JSON.parse(localStorage.getItem('pomodoroSettings')).alarmSoundOn
-	const backgroundSfx = JSON.parse(localStorage.getItem('pomodoroSettings')).chosenSound
-
+	const chosenSound = JSON.parse(localStorage.getItem('pomodoroSettings')).chosenSound
 	// States and refs
 	const currentPhase = useRef('focus')
 	const setTimeValues = currentPhase => {
@@ -33,12 +35,30 @@ export default function Clock(props) {
 	const pomodorosCount = useRef(0)
 	const clockInterval = useRef()
 
-	// Sounds Refs
+	// AUDIO
 	const clickSfxRef = useRef()
 	const alarmSfxRef = useRef()
 	const backgroundSfxRef = useRef()
 	if (backgroundSfxRef.current !== undefined) {
 		backgroundSfxRef.current.volume = parseFloat(JSON.parse(localStorage.getItem('pomodoroSettings')).backgroundVolume)
+	}
+	let backgroundSfx
+	switch (chosenSound) {
+		case 'rain1':
+			backgroundSfx = rain1
+			break
+		case 'rain2':
+			backgroundSfx = rain2
+			break
+		case 'ticking':
+			backgroundSfx = rain1
+			break
+		case 'waves':
+			backgroundSfx = rain2
+			break
+		default:
+			backgroundSfx = rain1
+			break
 	}
 
 	// Stop clock on component dismount
@@ -121,7 +141,7 @@ export default function Clock(props) {
 		<>
 			<audio src={clickSfx} ref={clickSfxRef} />
 			<audio src={alarmSfx} ref={alarmSfxRef} />
-			<audio loop src={`/src/sfx/${backgroundSfx}.mp3`} ref={backgroundSfxRef} />
+			<audio loop src={backgroundSfx} ref={backgroundSfxRef} />
 			<div className='timer__btns'>
 				<button onClick={resetClock} className='timer__btn'>
 					<i className='fa-solid fa-arrow-rotate-left'></i>

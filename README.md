@@ -11,7 +11,7 @@ In timer section, you can setup time values for each session (focus mode, short 
 
 In theme section, you can choose background color for each session.
 
-In audio section:
-Alarm Sound - Alarm sound which is playing when each session is over.
+In audio section:<br>
+Alarm Sound - Alarm sound which is playing when each session is over.<br>
 Background Sound - You can choose which sound you want to play in background.
 

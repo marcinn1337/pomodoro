@@ -1,4 +1,5 @@
 # Pomodoro & To Do 
+[Link to preview](https://marcinn1337.github.io/pomodoro/ "Pomodoro Preview")
 
 ## Created Using
 React, Vite, SCSS, Local storage, FL Studio (to create some sound effects or edit background sounds)
